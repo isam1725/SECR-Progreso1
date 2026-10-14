@@ -1,43 +1,43 @@
-n,operacion,alternativa,mediana_ms
-1000,"Registro de n conductores",A,2.537
-1000,"Registro de n conductores",B,4.668
-1000,"10.000 búsquedas por licencia",A,2.702
-1000,"10.000 búsquedas por licencia",B,0.934
-1000,"2.000 búsquedas por prefijo (10 resultados)",A,1.759
-1000,"2.000 búsquedas por prefijo (10 resultados)",B,2.452
-1000,"500 x (actualizar puntaje + top-10 riesgo)",A,61.369
-1000,"500 x (actualizar puntaje + top-10 riesgo)",B,0.839
-1000,"Registro de n eventos",A,0.148
-1000,"Registro de n eventos",B,0.114
-1000,"1.000 consultas por rango de 30 días",A,0.494
-1000,"1.000 consultas por rango de 30 días",B,0.965
-1000,"Memoria del índice (MB)",A,0.228
-1000,"Memoria del índice (MB)",B,0.300
-10000,"Registro de n conductores",A,78.160
-10000,"Registro de n conductores",B,68.307
-10000,"10.000 búsquedas por licencia",A,6.138
-10000,"10.000 búsquedas por licencia",B,2.597
-10000,"2.000 búsquedas por prefijo (10 resultados)",A,3.444
-10000,"2.000 búsquedas por prefijo (10 resultados)",B,2.613
-10000,"500 x (actualizar puntaje + top-10 riesgo)",A,1265.261
-10000,"500 x (actualizar puntaje + top-10 riesgo)",B,1.427
-10000,"Registro de n eventos",A,4.490
-10000,"Registro de n eventos",B,1.473
-10000,"1.000 consultas por rango de 30 días",A,3.544
-10000,"1.000 consultas por rango de 30 días",B,2.152
-10000,"Memoria del índice (MB)",A,2.248
-10000,"Memoria del índice (MB)",B,2.660
-100000,"Registro de n conductores",A,3741.037
-100000,"Registro de n conductores",B,795.539
-100000,"10.000 búsquedas por licencia",A,16.948
-100000,"10.000 búsquedas por licencia",B,4.524
-100000,"2.000 búsquedas por prefijo (10 resultados)",A,4.055
-100000,"2.000 búsquedas por prefijo (10 resultados)",B,3.263
-100000,"500 x (actualizar puntaje + top-10 riesgo)",A,26138.900
-100000,"500 x (actualizar puntaje + top-10 riesgo)",B,2.309
-100000,"Registro de n eventos",A,323.525
-100000,"Registro de n eventos",B,15.185
-100000,"1.000 consultas por rango de 30 días",A,38.829
-100000,"1.000 consultas por rango de 30 días",B,7.757
-100000,"Memoria del índice (MB)",A,23.149
-100000,"Memoria del índice (MB)",B,28.363
+n,operacion,alternativa,valor
+1000,"Registro de n conductores",A,0.568
+1000,"Registro de n conductores",B,0.424
+1000,"500 x (actualizar puntaje + top-10)",A,0.575
+1000,"500 x (actualizar puntaje + top-10)",B,1.240
+1000,"20 000 actualizaciones de puntaje",A,14.807
+1000,"20 000 actualizaciones de puntaje",B,5.663
+1000,"1 000 consultas top-10 (sin cambios)",A,0.118
+1000,"1 000 consultas top-10 (sin cambios)",B,1.335
+1000,"50 consultas semáforo rojo (< 40)",A,0.226
+1000,"50 consultas semáforo rojo (< 40)",B,0.913
+1000,"10 000 búsquedas por licencia",A,2.292
+1000,"10 000 búsquedas por licencia",B,1.617
+1000,"Memoria tras n registros y 2n cambios (MB)",A,0.084
+1000,"Memoria tras n registros y 2n cambios (MB)",B,0.123
+10000,"Registro de n conductores",A,14.751
+10000,"Registro de n conductores",B,9.830
+10000,"500 x (actualizar puntaje + top-10)",A,0.997
+10000,"500 x (actualizar puntaje + top-10)",B,1.298
+10000,"20 000 actualizaciones de puntaje",A,34.026
+10000,"20 000 actualizaciones de puntaje",B,12.047
+10000,"1 000 consultas top-10 (sin cambios)",A,0.147
+10000,"1 000 consultas top-10 (sin cambios)",B,1.518
+10000,"50 consultas semáforo rojo (< 40)",A,2.443
+10000,"50 consultas semáforo rojo (< 40)",B,12.022
+10000,"10 000 búsquedas por licencia",A,4.864
+10000,"10 000 búsquedas por licencia",B,5.487
+10000,"Memoria tras n registros y 2n cambios (MB)",A,0.839
+10000,"Memoria tras n registros y 2n cambios (MB)",B,1.223
+100000,"Registro de n conductores",A,287.972
+100000,"Registro de n conductores",B,204.622
+100000,"500 x (actualizar puntaje + top-10)",A,3.054
+100000,"500 x (actualizar puntaje + top-10)",B,2.056
+100000,"20 000 actualizaciones de puntaje",A,116.044
+100000,"20 000 actualizaciones de puntaje",B,42.193
+100000,"1 000 consultas top-10 (sin cambios)",A,0.179
+100000,"1 000 consultas top-10 (sin cambios)",B,1.527
+100000,"50 consultas semáforo rojo (< 40)",A,64.755
+100000,"50 consultas semáforo rojo (< 40)",B,220.217
+100000,"10 000 búsquedas por licencia",A,15.110
+100000,"10 000 búsquedas por licencia",B,15.647
+100000,"Memoria tras n registros y 2n cambios (MB)",A,8.392
+100000,"Memoria tras n registros y 2n cambios (MB)",B,12.358

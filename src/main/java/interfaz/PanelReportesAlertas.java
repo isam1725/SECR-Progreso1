@@ -301,19 +301,20 @@ public class PanelReportesAlertas extends JPanel {
                 return;
             }
 
-            java.util.Map<String, Integer> conteo = new java.util.HashMap<>();
+            // Conteo por tipo de infracción con un árbol AVL (sin tablas hash).
+            estructuras.ArbolAVL<String, int[]> conteo = new estructuras.ArbolAVL<>();
             int total = 0;
             for (modelo.Infraccion inf : c.getInfracciones()) {
-                String nombre = inf.getTipo().getNombre();
-                conteo.put(nombre, conteo.getOrDefault(nombre, 0) + 1);
+                conteo.obtenerOInsertar(inf.getTipo().getNombre(), () -> new int[1])[0]++;
                 total++;
             }
             String masComun = "";
             int max = 0;
-            for (java.util.Map.Entry<String, Integer> entry : conteo.entrySet()) {
-                if (entry.getValue() > max) {
-                    masComun = entry.getKey();
-                    max = entry.getValue();
+            for (String nombre : conteo.clavesEnOrden()) {
+                int cantidad = conteo.buscar(nombre)[0];
+                if (cantidad > max) {
+                    masComun = nombre;
+                    max = cantidad;
                 }
             }
             double porcentaje = max * 100.0 / total;

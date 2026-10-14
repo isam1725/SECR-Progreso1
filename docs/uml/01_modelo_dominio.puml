@@ -155,6 +155,19 @@ package "modelo" {
     + marcarAtendida() : void
   }
 
+  class Zona <<nueva>> {
+    - codigo : String
+    - nombre : String
+    - infraccionesRegistradas : int
+    + incrementarInfracciones() : void
+    + esPuntoCritico(umbral : int) : boolean
+  }
+
+  class TramoVial <<nueva>> {
+    - distanciaKm : double
+    - bidireccional : boolean
+  }
+
   class Alerta <<existente>> {
     - nivel : NivelAlerta
     - mensaje : String
@@ -176,6 +189,8 @@ Curso "1" *-- "0..*" Pregunta : banco >
 InscripcionCurso "0..*" --> "1" Conductor : solicitante >
 InscripcionCurso "0..*" --> "1" Curso : solicita >
 Alerta "0..*" --> "1" Conductor : advierte a >
+EventoConduccion "0..*" --> "0..1" Zona : ocurre en >
+TramoVial "0..*" --> "2" Zona : une >
 Conductor ..> EstadoConductor
 Licencia ..> CategoriaLicencia
 Alerta ..> NivelAlerta

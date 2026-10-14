@@ -5,11 +5,11 @@
 
 | Integrante | Módulo a cargo |
 |---|---|
-| Mateo Vasquez | M1 · Conductores y licencias (tabla hash + Trie) |
-| Alex Palma | M2 · Eventos e infracciones (árbol rojo-negro por fechas) |
-| Martín Jurado | M3 · Puntaje y priorización de riesgo (montículo indexado) |
-| Amelio Macas | M4 · Recuperación de puntos: cursos, cola de inscripción y pruebas |
-| Israel Zurita | M5 · Alertas y reportes (cola de prioridad de caducidad, ordenamiento) |
+| Mateo Vasquez | M1 · Conductores y licencias (árboles AVL por licencia y por nombre) |
+| Alex Palma | M2 · Eventos e infracciones (AVL por fecha + pila para deshacer) |
+| Martín Jurado | M3 · Puntaje y priorización de riesgo (ranking sobre árboles AVL) |
+| Amelio Macas | M4 · Recuperación de puntos: cursos, cola FIFO de inscripción y pruebas |
+| Israel Zurita | M5 · Alertas, reportes y operativos (cola de prioridad + grafo vial con BFS/DFS/Dijkstra) |
 
 ## 1. Problema
 
@@ -17,32 +17,37 @@ En Ecuador la licencia de conducir funciona con un sistema de puntos, pero el se
 comportamiento de cada conductor está repartido entre registros de infracciones, cursos y
 renovaciones. SECR centraliza esa información y, sobre todo, la **procesa**: calcula un puntaje de
 conducción responsable (0 a 100), mantiene siempre actualizado el **ranking de conductores de mayor
-riesgo**, consulta el historial de infracciones **por rangos de fechas**, busca conductores **por
-prefijo de nombre** y organiza la **cola de inscripción** a cursos de recuperación de puntos.
+riesgo**, consulta el historial de infracciones **por rangos de fechas**, organiza la **cola de
+inscripción** a cursos de recuperación y planifica **operativos de control** sobre un mapa vial.
 
-El proyecto reutiliza el código del semestre anterior (*TallerEntregaFinal*, interfaz Swing + capas
-modelo/negocio) y lo extiende con estructuras de datos y algoritmos seleccionados en el Progreso 1.
+**Restricción de diseño:** solo se usan **pilas, colas, árboles y grafos**, implementados por el
+equipo. No se usan tablas hash (HashMap, HashSet, LinkedHashMap) ni Trie; las del código heredado
+fueron reemplazadas por `ArbolAVL`.
 
-## 2. Alternativa seleccionada (resumen)
+## 2. Estructuras y alternativa seleccionada
 
-| Componente | Alternativa A (descartada) | **Alternativa B (seleccionada)** |
-|---|---|---|
-| Búsqueda por licencia | Lista ordenada + búsqueda binaria, O(log n) | **HashMap**, O(1) promedio |
-| Búsqueda por prefijo de nombre | Lista ordenada de palabras, O(log n + k) | **Trie**, O(P + R) |
-| Ranking de riesgo (top-k) | Reordenar todo en cada consulta, O(n log n) | **Montículo binario indexado**, O(k log k); actualización O(log n) |
-| Historial por rango de fechas | Lista ordenada, inserción O(n) | **TreeMap (árbol rojo-negro)**, inserción O(log n) |
+| Estructura (propia) | Uso en SECR |
+|---|---|
+| `ArbolAVL<K,V>` | Índices por licencia, nombre, fecha y código de curso; conteos; ranking de riesgo |
+| `Pila<T>` | Deshacer el último registro (M2); recorridos iterativos (in-order, DFS) |
+| `Cola<T>` | Cola FIFO de inscripción a cursos (M4); BFS |
+| `MonticuloBinario<T>` | Cola de prioridad de caducidad de licencias (M5); Dijkstra |
+| `Grafo` | Mapa vial: zonas de influencia (BFS), ruta de operativos (Dijkstra), zonas aisladas (DFS) |
 
-Resultados del benchmark con n = 100 000 (mediana de 5 repeticiones, OpenJDK 21, 2 vCPU):
+Para el componente crítico (ranking de riesgo, M3) se compararon dos alternativas competitivas:
+**A** (dos árboles AVL) y **B** (cola de prioridad con actualización perezosa).
+Resultados con n = 100 000 (mediana de 5 repeticiones, OpenJDK 21, 2 vCPU):
 
-| Operación | A | B |
+| Operación | A · AVL | B · montículo |
 |---|---:|---:|
-| Registro de 100 000 conductores | 3 741 ms | 796 ms |
-| 500 × (actualizar puntaje + top-10 de riesgo) | 26 139 ms | 2,3 ms |
-| Registro de 100 000 eventos | 324 ms | 15 ms |
-| 1 000 consultas por rango de 30 días | 38,8 ms | 7,8 ms |
-| Memoria aproximada del índice | 23,1 MB | 28,4 MB |
+| 20 000 actualizaciones de puntaje | 116,0 ms | 42,2 ms |
+| 1 000 consultas top-10 | 0,18 ms | 1,53 ms |
+| 50 consultas semáforo rojo | 64,8 ms | 220,2 ms |
+| Memoria tras n registros y 2n cambios | 8,4 MB | 12,4 MB |
 
-Detalle completo en [`docs/benchmark/resultados.csv`](docs/benchmark/resultados.csv) y en el informe técnico.
+**Seleccionada: Alternativa A** (consultas ordenadas y más rápidas, memoria fija, una sola estructura
+reutilizada en todos los módulos). Detalle en [`docs/benchmark/resultados.csv`](docs/benchmark/resultados.csv)
+y en el informe técnico.
 
 ## 3. Estructura del repositorio
 
@@ -53,14 +58,14 @@ Detalle completo en [`docs/benchmark/resultados.csv`](docs/benchmark/resultados.
 │   ├── informe/               Informe técnico del Progreso 1 (PDF)
 │   ├── uml/                   Diagramas UML en PlantUML (.puml) y exportados (.png/.svg)
 │   └── benchmark/             Resultados (CSV) y gráfico de la comparación A vs B
-└── src/
+└── src/main/java/
     ├── modelo/                Clases de dominio (reutilizadas): Conductor, Licencia, EventoConduccion…
-    ├── negocio/               Gestores (lógica de negocio): conductores, eventos, cursos, reportes
+    ├── negocio/               Gestores de cada módulo (ahora sobre ArbolAVL, sin tablas hash)
     ├── interfaz/              Interfaz gráfica Swing (reutilizada)
     ├── util/                  SistemaSECR (fachada que agrupa los gestores)
-    ├── estructuras/           NUEVO: Trie, MonticuloIndexado, IndiceTemporalEventos,
-    │   │                      OrdenamientoMezcla, BusquedaBinaria
-    │   └── comparacion/       NUEVO: implementaciones A y B con una interfaz común
+    ├── estructuras/           NUEVO: ArbolAVL, Pila, Cola, MonticuloBinario, Grafo,
+    │   │                      IndiceTemporalEventos, OrdenamientoMezcla
+    │   └── comparacion/       NUEVO: RankingRiesgo, alternativas A (AVL) y B (montículo)
     └── benchmark/             NUEVO: pruebas automáticas y benchmark A vs B
 ```
 
@@ -70,9 +75,9 @@ Requisitos: **JDK 17 o superior** (probado con OpenJDK 21). No se necesitan libr
 
 ```bash
 # Compilar todo
-javac -encoding UTF-8 -d out $(find src -name "*.java")          # Linux / macOS
+javac -encoding UTF-8 -d out $(find src/main/java -name "*.java")   # Linux / macOS
 # Windows (PowerShell):
-# javac -encoding UTF-8 -d out (Get-ChildItem -Recurse src -Filter *.java).FullName
+# javac -encoding UTF-8 -d out (Get-ChildItem -Recurse src/main/java -Filter *.java).FullName
 
 # Aplicación con interfaz gráfica
 java -cp out interfaz.Interfaz
@@ -80,14 +85,14 @@ java -cp out interfaz.Interfaz
 # Aplicación de consola
 java -cp out modelo.Main
 
-# Pruebas automáticas de las estructuras (16 pruebas, incluye equivalencia A = B)
+# Pruebas automáticas (29 pruebas: AVL, pila, cola, montículo, grafo, A = B y gestores)
 java -cp out benchmark.PruebasEstructuras
 
 # Benchmark A vs B (tarda unos minutos; escribe docs/benchmark/resultados.csv)
 java -Xmx3g -cp out benchmark.BenchmarkAlternativas
 ```
 
-En IntelliJ IDEA: *File → Open* sobre la carpeta, marcar `src` como *Sources Root* y ejecutar
+En IntelliJ IDEA: *File → Open* sobre la carpeta, marcar `src/main/java` como *Sources Root* y ejecutar
 `interfaz.Interfaz`.
 
 ## 5. Diagramas UML
@@ -96,7 +101,7 @@ Los diagramas se mantienen como código en PlantUML para que el equipo los revis
 
 * `docs/uml/01_modelo_dominio.puml`: clases de dominio, atributos, métodos, multiplicidades,
   herencia (`EventoConduccion` → `Infraccion`) y composiciones.
-* `docs/uml/02_negocio_estructuras.puml`: gestores por módulo y estructuras de datos seleccionadas.
+* `docs/uml/02_negocio_estructuras.puml`: gestores por módulo y estructuras propias (pilas, colas, árboles y grafo).
 
 Se pueden abrir con la extensión *PlantUML* de IntelliJ/VS Code o en <https://www.plantuml.com/plantuml>.
 
@@ -114,9 +119,10 @@ Se pueden abrir con la extensión *PlantUML* de IntelliJ/VS Code o en <https://w
 | Entregable | Estado |
 |---|---|
 | Código base del semestre anterior (Swing, modelo, negocio) | Reutilizado y compilando |
-| Estructuras de la alternativa B (prototipo probado) | Listo |
+| Estructuras propias (AVL, pila, cola, montículo, grafo) y alternativas A/B probadas | Listo |
+| Tablas hash del código heredado reemplazadas por ArbolAVL | Listo |
 | Integración de las estructuras en los gestores y en la interfaz | Planificado para Progreso 2 |
-| Nuevas clases `InscripcionCurso`, `GestorRiesgo` y enums de estado | Planificado para Progreso 2 |
+| Nuevas clases `InscripcionCurso`, `Zona`, `TramoVial`, `GestorRiesgo` y enums de estado | Planificado para Progreso 2 |
 
 ## 8. Uso de IA
 

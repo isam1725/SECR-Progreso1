@@ -3,11 +3,13 @@ package negocio;
 import static modelo.Main.*;
 import modelo.*;
 import java.time.LocalDate;
+import estructuras.ArbolAVL;
 import java.util.*;
 
 public class GestorConductores {
-    private Map<String, Conductor> conductores = new LinkedHashMap<>();
-    private Map<String, HistorialConduccion> historiales = new LinkedHashMap<>();
+    // Índices sobre árboles AVL (sin tablas hash): búsqueda, inserción y eliminación en O(log n).
+    private final ArbolAVL<String, Conductor> conductores = new ArbolAVL<>();
+    private final ArbolAVL<String, HistorialConduccion> historiales = new ArbolAVL<>();
 
     public boolean registrarConductor(Conductor c) throws SecrException {
         if (c == null) throw new ConductorNoEncontradoException("No se recibió información del conductor.");
@@ -20,23 +22,23 @@ public class GestorConductores {
         Validaciones.validarFechaEmision(c.getLicencia().getFechaEmision(), c.getFechaNacimiento());
 
         String numLicencia = c.getLicencia().getNumero().toUpperCase();
-        if (conductores.containsKey(numLicencia)) throw new LicenciaDuplicadaException("Ya existe un conductor con la licencia " + numLicencia + ".");
+        if (conductores.contiene(numLicencia)) throw new LicenciaDuplicadaException("Ya existe un conductor con la licencia " + numLicencia + ".");
         if (buscarPorCedula(c.getCedula()) != null) throw new SecrException("Ya existe un conductor con la cédula " + c.getCedula() + ".");
 
-        conductores.put(numLicencia, c);
-        historiales.put(numLicencia, c.getHistorialConduccion());
+        conductores.insertar(numLicencia, c);
+        historiales.insertar(numLicencia, c.getHistorialConduccion());
         System.out.println("✅ Conductor registrado exitosamente: " + c.getNombreCompleto() + " (" + c.getEdad() + " años)");
         return true;
     }
 
     public Conductor buscarPorCedula(String cedula) {
-        for (Conductor c : conductores.values()) if (c.getCedula().equals(cedula)) return c;
+        for (Conductor c : conductores.valoresEnOrden()) if (c.getCedula().equals(cedula)) return c;
         return null;
     }
 
     public Conductor buscarPorLicencia(String licencia) {
         if (licencia == null) return null;
-        return conductores.get(licencia.trim().toUpperCase());
+        return conductores.buscar(licencia.trim().toUpperCase());
     }
 
     public Conductor obtenerConductorObligatorio(String licencia) throws ConductorNoEncontradoException {
@@ -45,7 +47,7 @@ public class GestorConductores {
         return c;
     }
 
-    public List<Conductor> listarTodos() { return new ArrayList<>(conductores.values()); }
+    public List<Conductor> listarTodos() { return conductores.valoresEnOrden(); }
 
     public boolean actualizarConductor(String licencia, String nuevoNombre, LocalDate nuevaFechaNac,
                                        LocalDate nuevoVencimiento) throws SecrException {
@@ -73,8 +75,8 @@ public class GestorConductores {
         if (c.tieneHistorial()) {
             throw new SecrException("No se puede eliminar porque el conductor tiene historial de infracciones, pruebas o renovaciones.");
         }
-        conductores.remove(c.getLicencia().getNumero().toUpperCase());
-        historiales.remove(c.getLicencia().getNumero().toUpperCase());
+        conductores.eliminar(c.getLicencia().getNumero().toUpperCase());
+        historiales.eliminar(c.getLicencia().getNumero().toUpperCase());
         System.out.println("✅ Conductor eliminado correctamente: " + c.getNombreCompleto());
         return true;
     }
@@ -117,7 +119,7 @@ public class GestorConductores {
 
     public List<Conductor> obtenerAlertasCaducidad(int diasAnticipacion) {
         List<Conductor> alertas = new ArrayList<>();
-        for (Conductor c : conductores.values()) {
+        for (Conductor c : conductores.valoresEnOrden()) {
             Licencia lic = c.getLicencia();
             if (lic.estaVencida() || lic.estaCercaDeCaducar(diasAnticipacion)) alertas.add(c);
         }
@@ -160,22 +162,22 @@ public class GestorConductores {
     }
 
     public String estadisticaInfraccionMasComun() {
-        Map<String, Integer> conteo = new HashMap<>();
+        // Conteo por tipo con un árbol AVL (nombre → contador): O(I log T), I = infracciones, T = tipos.
+        ArbolAVL<String, int[]> conteo = new ArbolAVL<>();
         int totalInfracciones = 0;
-        for (Conductor c : conductores.values()) {
+        for (Conductor c : conductores.valoresEnOrden()) {
             for (Infraccion inf : c.getInfracciones()) {
-                String nombre = inf.getTipo().getNombre();
-                conteo.put(nombre, conteo.getOrDefault(nombre, 0) + 1);
+                conteo.obtenerOInsertar(inf.getTipo().getNombre(), () -> new int[1])[0]++;
                 totalInfracciones++;
             }
         }
         if (totalInfracciones == 0) return "No hay infracciones registradas.";
-        String masComun = null;
-        int max = 0;
-        for (Map.Entry<String, Integer> entry : conteo.entrySet()) {
-            if (entry.getValue() > max) { max = entry.getValue(); masComun = entry.getKey(); }
-        }
-        double porcentaje = (max * 100.0) / totalInfracciones;
-        return "Infracción más cometida: " + masComun + "\nCantidad: " + max + " veces (" + String.format("%.1f", porcentaje) + "% del total)";
+        String[] masComun = {null};
+        int[] max = {0};
+        conteo.recorrerEnOrden((nombre, cont) -> {
+            if (cont[0] > max[0]) { max[0] = cont[0]; masComun[0] = nombre; }
+        });
+        double porcentaje = (max[0] * 100.0) / totalInfracciones;
+        return "Infracción más cometida: " + masComun[0] + "\nCantidad: " + max[0] + " veces (" + String.format("%.1f", porcentaje) + "% del total)";
     }
 }

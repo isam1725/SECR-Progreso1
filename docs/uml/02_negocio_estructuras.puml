@@ -1,11 +1,11 @@
 @startuml 02_negocio_estructuras
-' SECR - Capa de negocio y estructuras de datos seleccionadas (Alternativa B)
+' SECR - Capa de negocio y estructuras de datos (solo pilas, colas, árboles y grafos)
 ' Programación III - Progreso 1 - Grupo 4
 
 skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam linetype ortho
-skinparam nodesep 60
+skinparam nodesep 55
 skinparam ranksep 70
 skinparam defaultFontName Arial
 skinparam defaultFontSize 12
@@ -13,10 +13,6 @@ skinparam class {
   BackgroundColor #FFFFFF
   BorderColor #8C1D40
   ArrowColor #333333
-}
-skinparam class<<nueva>> {
-  BackgroundColor #EAF4EA
-  BorderColor #2E7D32
 }
 skinparam class<<estructura>> {
   BackgroundColor #E8F0FB
@@ -26,7 +22,7 @@ skinparam package {
   BorderColor #777777
 }
 
-title SECR - Módulos de negocio y estructuras de datos (Alternativa B)
+title SECR - Módulos de negocio y estructuras de datos (Alternativa A seleccionada)
 
 package "util" {
   class SistemaSECR {
@@ -40,37 +36,37 @@ package "util" {
 
 package "negocio" {
   class GestorConductores <<M1 Mateo Vasquez>> {
-    - conductores : HashMap<String, Conductor>
-    - indiceNombres : Trie
+    - porLicencia : ArbolAVL<String, Conductor>
+    - porNombre : ArbolAVL<String, Conductor>
     + registrarConductor(c : Conductor) : boolean
     + buscarPorLicencia(lic : String) : Conductor
-    + buscarPorPrefijoNombre(p : String, k : int) : List<Conductor>
+    + buscarPorPrefijoNombre(p : String) : List<Conductor>
     + filtrar(categoria, estado) : List<Conductor>
     + renovarLicencia(lic : String) : RenovacionLicencia
   }
 
   class GestorEventos <<M2 Alex Palma>> {
-    - tiposEvento : List<TipoEvento>
     - indiceFechas : IndiceTemporalEventos
+    - historialDeshacer : Pila<OperacionRegistro>
     + registrarEvento(...) : boolean
     + consultarPorRango(desde, hasta) : List<EventoConduccion>
     + ordenarPorGravedad(lista) : List<EventoConduccion>
+    + deshacerUltimoRegistro() : void
     + infraccionMasComun() : String
-    + ubicacionesCriticas(k : int) : List<String>
   }
 
   class GestorRiesgo <<M3 Martín Jurado>> #EAF4EA {
-    - monticulo : MonticuloIndexado
+    - ranking : RankingRiesgoAVL
     + recalcularPuntaje(c : Conductor) : double
     + actualizarPrioridad(lic : String, puntaje : double) : void
     + topRiesgo(k : int) : List<Conductor>
-    + clasificarSemaforo(puntaje : double) : NivelAlerta
+    + porSemaforo(nivel : NivelAlerta) : List<Conductor>
     + aplicarBonificacion(lic : String) : int
   }
 
   class GestorCursos <<M4 Amelio Macas>> {
-    - cursos : LinkedHashMap<String, Curso>
-    - colaInscripciones : ArrayDeque<InscripcionCurso>
+    - cursos : ArbolAVL<String, Curso>
+    - colaInscripciones : Cola<InscripcionCurso>
     + inscribir(c : Conductor, curso : Curso) : InscripcionCurso
     + asignarCupos(codigoCurso : String) : List<InscripcionCurso>
     + generarPruebaAleatoria(curso, n) : List<Pregunta>
@@ -79,69 +75,85 @@ package "negocio" {
   }
 
   class GestorReportes <<M5 Israel Zurita>> {
-    - colaCaducidad : PriorityQueue<Licencia>
-    + generarReporteIndividual(c : Conductor) : String
-    + generarReporteGeneral(lista) : String
+    - mapaVial : Grafo
+    - colaCaducidad : MonticuloBinario<Licencia>
     + alertasCaducidadPriorizadas(dias : int) : List<Alerta>
-    + ordenarReporte(lista, criterios) : List<Conductor>
+    + zonasCriticas(k : int) : List<Zona>
+    + rutaOperativo(base, zona) : Ruta
+    + zonasDeInfluencia(zona, saltos) : List<Zona>
+    + generarReporteIndividual(c : Conductor) : String
   }
 }
 
 package "estructuras" {
-  class Trie <<estructura>> {
+  class "ArbolAVL<K, V>" as ArbolAVL <<estructura>> {
     - raiz : Nodo
-    + insertarNombre(nombre, valor) : void
-    + eliminarNombre(nombre, valor) : void
-    + buscarPorPrefijo(p : String, k : int) : List<String>
+    + insertar(k, v) : void
+    + buscar(k) : V
+    + eliminar(k) : boolean
+    + rango(desde, hasta) : List<V>
+    + primeros(k : int) : List<V>
   }
-  class MonticuloIndexado <<estructura>> {
-    - claves : List<String>
-    - prioridades : List<Double>
-    - posicion : Map<String, Integer>
-    + insertar(clave, prioridad) : void
-    + actualizar(clave, prioridad) : void
-    + extraerMinimo() : String
-    + topK(k : int) : List<String>
+  class RankingRiesgoAVL <<estructura>> {
+    - porLicencia : ArbolAVL<String, Conductor>
+    - porRiesgo : ArbolAVL<ClaveRiesgo, Conductor>
+    + actualizarPuntaje(lic, p) : void
+    + topRiesgo(k : int) : List<Conductor>
+    + enRangoPuntaje(min, max) : List<Conductor>
   }
   class IndiceTemporalEventos <<estructura>> {
-    - porFecha : TreeMap<LocalDate, List<EventoConduccion>>
-    + agregar(e : EventoConduccion) : void
+    - porFecha : ArbolAVL<LocalDate, List<EventoConduccion>>
     + consultarRango(desde, hasta) : List<EventoConduccion>
   }
-  class OrdenamientoMezcla <<estructura>> {
-    + {static} ordenar(lista, comparador) : List<T>
+  class "MonticuloBinario<T>" as MonticuloBinario <<estructura>> {
+    + insertar(x : T) : void
+    + extraerMinimo() : T
+    + menores(k, filtro) : List<T>
+  }
+  class "Cola<T>" as Cola <<estructura>> {
+    + encolar(x : T) : void
+    + desencolar() : T
+  }
+  class "Pila<T>" as Pila <<estructura>> {
+    + apilar(x : T) : void
+    + desapilar() : T
+  }
+  class Grafo <<estructura>> {
+    - adyacencia : List<List<Arista>>
+    + zonasCercanas(origen, saltos) : List<String>
+    + rutaMasCorta(origen, destino) : Ruta
+    + componentesConexas() : List<List<String>>
   }
 }
 
-package "interfaz" {
-  class VentanaPrincipal {
-    - sistema : SistemaSECR
-  }
-}
-
-VentanaPrincipal --> "1" SistemaSECR
 SistemaSECR "1" *-- "1" GestorConductores
 SistemaSECR "1" *-- "1" GestorEventos
 SistemaSECR "1" *-- "1" GestorRiesgo
 SistemaSECR "1" *-- "1" GestorCursos
 SistemaSECR "1" *-- "1" GestorReportes
 
-GestorConductores "1" *-- "1" Trie
-GestorRiesgo "1" *-- "1" MonticuloIndexado
+GestorConductores "1" *-- "2" ArbolAVL
 GestorEventos "1" *-- "1" IndiceTemporalEventos
-GestorReportes ..> OrdenamientoMezcla : usa
+GestorEventos "1" *-- "1" Pila
+GestorRiesgo "1" *-- "1" RankingRiesgoAVL
+GestorCursos "1" *-- "1" Cola
+GestorReportes "1" *-- "1" Grafo
+GestorReportes "1" *-- "1" MonticuloBinario
+RankingRiesgoAVL "1" *-- "2" ArbolAVL
+IndiceTemporalEventos "1" *-- "1" ArbolAVL
+Grafo ..> Cola : BFS
+Grafo ..> MonticuloBinario : Dijkstra
+Grafo ..> Pila : DFS
 
-GestorEventos ..> GestorConductores : obtiene conductor
 GestorEventos ..> GestorRiesgo : notifica deducción
 GestorCursos ..> GestorRiesgo : notifica recuperación
-GestorReportes ..> GestorRiesgo : consulta top-k
-GestorReportes ..> GestorConductores : consulta datos
+GestorReportes ..> GestorRiesgo : consulta ranking
 
 legend right
   |= Color |= Significado |
-  |<#F6E7EC>| Clase reutilizada (semestre anterior) |
-  |<#EAF4EA>| Clase nueva (Progreso 2) |
-  |<#E8F0FB>| Estructura de datos propia del equipo |
+  |<#FFFFFF>| Gestor reutilizado (semestre anterior) |
+  |<#EAF4EA>| Gestor nuevo (Progreso 2) |
+  |<#E8F0FB>| Estructura propia: pila, cola, árbol o grafo |
   Estereotipo <<Mx Nombre>> = módulo y responsable
 endlegend
 @enduml

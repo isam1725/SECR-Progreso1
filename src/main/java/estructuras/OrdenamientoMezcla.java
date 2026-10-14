@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Ordenamiento por mezcla (Merge Sort) estable, implementado por el equipo.
  * Tiempo O(n log n) en todos los casos; espacio auxiliar O(n).
- * Se usa en la Alternativa A para el ranking de riesgo y, en la solución elegida,
+ * Se usa en M2 (eventos por gravedad y fecha) y en M5
  * para ordenar reportes por varios criterios (la estabilidad conserva el orden previo).
  */
 public final class OrdenamientoMezcla {

@@ -2,10 +2,12 @@ package negocio;
 
 import static modelo.Main.*;
 import modelo.*;
+import estructuras.ArbolAVL;
 import java.util.*;
 
 public class GestorCursos {
-    private Map<String, Curso> cursos = new LinkedHashMap<>();
+    // Catálogo de cursos indexado por código en un árbol AVL (sin tablas hash).
+    private final ArbolAVL<String, Curso> cursos = new ArbolAVL<>();
     private int contadorPregunta = 1;
 
     public GestorCursos() {
@@ -23,8 +25,8 @@ public class GestorCursos {
             basico.agregarPregunta(new Pregunta(generarIdPregunta(), p.getTexto(), p.getOpciones(), p.getRespuestaCorrecta(), basico.getCodigo()));
             avanzado.agregarPregunta(new Pregunta(generarIdPregunta(), p.getTexto(), p.getOpciones(), p.getRespuestaCorrecta(), avanzado.getCodigo()));
         }
-        cursos.put(basico.getCodigo(), basico);
-        cursos.put(avanzado.getCodigo(), avanzado);
+        cursos.insertar(basico.getCodigo(), basico);
+        cursos.insertar(avanzado.getCodigo(), avanzado);
     }
 
     public String generarIdPregunta() {
@@ -43,7 +45,7 @@ public class GestorCursos {
 
     public boolean existePregunta(String idPregunta) {
         if (idPregunta == null) return false;
-        for (Curso curso : cursos.values()) {
+        for (Curso curso : cursos.valoresEnOrden()) {
             for (Pregunta pregunta : curso.getPreguntas()) {
                 if (pregunta.getId().equalsIgnoreCase(idPregunta.trim())) return true;
             }
@@ -51,9 +53,9 @@ public class GestorCursos {
         return false;
     }
 
-    public List<Curso> listarCursos() { return new ArrayList<>(cursos.values()); }
+    public List<Curso> listarCursos() { return cursos.valoresEnOrden(); }
 
-    public Curso buscarCurso(String codigo) { return cursos.get(codigo); }
+    public Curso buscarCurso(String codigo) { return cursos.buscar(codigo); }
 
     public Curso obtenerCursoObligatorio(String codigo) throws PruebaNoValidaException {
         Curso c = buscarCurso(codigo);
@@ -68,8 +70,8 @@ public class GestorCursos {
         Validaciones.validarPuntos(curso.getPuntosRecuperacion());
         if (curso.getDuracionHoras() <= 0) throw new PruebaNoValidaException("La duración del curso debe ser mayor a 0 horas.");
         if (curso.getPorcentajeMinimoAprobacion() < 0 || curso.getPorcentajeMinimoAprobacion() > 100) throw new PruebaNoValidaException("El porcentaje mínimo debe estar entre 0 y 100.");
-        if (cursos.containsKey(curso.getCodigo())) throw new PruebaNoValidaException("Ya existe un curso con ese código.");
-        cursos.put(curso.getCodigo(), curso);
+        if (cursos.contiene(curso.getCodigo())) throw new PruebaNoValidaException("Ya existe un curso con ese código.");
+        cursos.insertar(curso.getCodigo(), curso);
     }
 
     public void actualizarCurso(String codigo, String nombre, String descripcion, int puntos, int horas, double minimo, String estado) throws SecrException {
@@ -90,7 +92,7 @@ public class GestorCursos {
         if (!c.getPreguntas().isEmpty()) {
             throw new PruebaNoValidaException("No se puede eliminar el curso porque tiene preguntas registradas. Primero elimine sus preguntas.");
         }
-        cursos.remove(codigo);
+        cursos.eliminar(codigo);
     }
 
     public List<Pregunta> listarPreguntas(String codigoCurso) throws PruebaNoValidaException {
@@ -143,13 +145,13 @@ public class GestorCursos {
     }
 
     public String reporteMejorCurso(List<Conductor> conductores) {
-        Map<String, int[]> estadisticas = new LinkedHashMap<>(); // [rendidas, aprobadas]
-        for (Curso c : cursos.values()) {
-            estadisticas.put(c.getCodigo(), new int[]{0, 0});
+        ArbolAVL<String, int[]> estadisticas = new ArbolAVL<>(); // código → [rendidas, aprobadas]
+        for (Curso c : cursos.valoresEnOrden()) {
+            estadisticas.insertar(c.getCodigo(), new int[]{0, 0});
         }
         for (Conductor conductor : conductores) {
             for (Prueba p : conductor.getHistorialPruebas()) {
-                int[] datos = estadisticas.computeIfAbsent(p.getCurso().getCodigo(), k -> new int[]{0, 0});
+                int[] datos = estadisticas.obtenerOInsertar(p.getCurso().getCodigo(), () -> new int[]{0, 0});
                 datos[0]++;
                 if (p.estaAprobada()) datos[1]++;
             }
@@ -157,18 +159,18 @@ public class GestorCursos {
         String mejor = null;
         double mejorPorcentaje = -1;
         StringBuilder detalle = new StringBuilder("REPORTE DE CURSOS POR APROBACIÓN\n\n");
-        for (Map.Entry<String, int[]> e : estadisticas.entrySet()) {
-            Curso curso = buscarCurso(e.getKey());
-            int rendidas = e.getValue()[0];
-            int aprobadas = e.getValue()[1];
+        for (String codigo : estadisticas.clavesEnOrden()) {
+            Curso curso = buscarCurso(codigo);
+            int rendidas = estadisticas.buscar(codigo)[0];
+            int aprobadas = estadisticas.buscar(codigo)[1];
             double porcentaje = rendidas == 0 ? 0 : (aprobadas * 100.0 / rendidas);
-            detalle.append(curso != null ? curso.getNombre() : e.getKey())
+            detalle.append(curso != null ? curso.getNombre() : codigo)
                     .append(" | Rendidas: ").append(rendidas)
                     .append(" | Aprobadas: ").append(aprobadas)
                     .append(" | % aprobación: ").append(String.format("%.1f", porcentaje)).append("%\n");
             if (rendidas > 0 && porcentaje > mejorPorcentaje) {
                 mejorPorcentaje = porcentaje;
-                mejor = curso != null ? curso.getNombre() : e.getKey();
+                mejor = curso != null ? curso.getNombre() : codigo;
             }
         }
         detalle.append("\nMejor curso: ").append(mejor == null ? "No hay pruebas rendidas" : mejor + " (" + String.format("%.1f", mejorPorcentaje) + "%)");
