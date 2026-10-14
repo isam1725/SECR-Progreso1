@@ -1,0 +1,147 @@
+@startuml 02_negocio_estructuras
+' SECR - Capa de negocio y estructuras de datos seleccionadas (Alternativa B)
+' Programación III - Progreso 1 - Grupo 4
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #8C1D40
+  ArrowColor #333333
+}
+skinparam class<<nueva>> {
+  BackgroundColor #EAF4EA
+  BorderColor #2E7D32
+}
+skinparam class<<estructura>> {
+  BackgroundColor #E8F0FB
+  BorderColor #1F4E8C
+}
+skinparam package {
+  BorderColor #777777
+}
+
+title SECR - Módulos de negocio y estructuras de datos (Alternativa B)
+
+package "util" {
+  class SistemaSECR {
+    + getGestorConductores() : GestorConductores
+    + getGestorEventos() : GestorEventos
+    + getGestorRiesgo() : GestorRiesgo
+    + getGestorCursos() : GestorCursos
+    + getGestorReportes() : GestorReportes
+  }
+}
+
+package "negocio" {
+  class GestorConductores <<M1 Mateo Vasquez>> {
+    - conductores : HashMap<String, Conductor>
+    - indiceNombres : Trie
+    + registrarConductor(c : Conductor) : boolean
+    + buscarPorLicencia(lic : String) : Conductor
+    + buscarPorPrefijoNombre(p : String, k : int) : List<Conductor>
+    + filtrar(categoria, estado) : List<Conductor>
+    + renovarLicencia(lic : String) : RenovacionLicencia
+  }
+
+  class GestorEventos <<M2 Alex Palma>> {
+    - tiposEvento : List<TipoEvento>
+    - indiceFechas : IndiceTemporalEventos
+    + registrarEvento(...) : boolean
+    + consultarPorRango(desde, hasta) : List<EventoConduccion>
+    + ordenarPorGravedad(lista) : List<EventoConduccion>
+    + infraccionMasComun() : String
+    + ubicacionesCriticas(k : int) : List<String>
+  }
+
+  class GestorRiesgo <<M3 Martín Jurado>> #EAF4EA {
+    - monticulo : MonticuloIndexado
+    + recalcularPuntaje(c : Conductor) : double
+    + actualizarPrioridad(lic : String, puntaje : double) : void
+    + topRiesgo(k : int) : List<Conductor>
+    + clasificarSemaforo(puntaje : double) : NivelAlerta
+    + aplicarBonificacion(lic : String) : int
+  }
+
+  class GestorCursos <<M4 Amelio Macas>> {
+    - cursos : LinkedHashMap<String, Curso>
+    - colaInscripciones : ArrayDeque<InscripcionCurso>
+    + inscribir(c : Conductor, curso : Curso) : InscripcionCurso
+    + asignarCupos(codigoCurso : String) : List<InscripcionCurso>
+    + generarPruebaAleatoria(curso, n) : List<Pregunta>
+    + calificarPrueba(...) : Prueba
+    + reporteMejorCurso() : String
+  }
+
+  class GestorReportes <<M5 Israel Zurita>> {
+    - colaCaducidad : PriorityQueue<Licencia>
+    + generarReporteIndividual(c : Conductor) : String
+    + generarReporteGeneral(lista) : String
+    + alertasCaducidadPriorizadas(dias : int) : List<Alerta>
+    + ordenarReporte(lista, criterios) : List<Conductor>
+  }
+}
+
+package "estructuras" {
+  class Trie <<estructura>> {
+    - raiz : Nodo
+    + insertarNombre(nombre, valor) : void
+    + eliminarNombre(nombre, valor) : void
+    + buscarPorPrefijo(p : String, k : int) : List<String>
+  }
+  class MonticuloIndexado <<estructura>> {
+    - claves : List<String>
+    - prioridades : List<Double>
+    - posicion : Map<String, Integer>
+    + insertar(clave, prioridad) : void
+    + actualizar(clave, prioridad) : void
+    + extraerMinimo() : String
+    + topK(k : int) : List<String>
+  }
+  class IndiceTemporalEventos <<estructura>> {
+    - porFecha : TreeMap<LocalDate, List<EventoConduccion>>
+    + agregar(e : EventoConduccion) : void
+    + consultarRango(desde, hasta) : List<EventoConduccion>
+  }
+  class OrdenamientoMezcla <<estructura>> {
+    + {static} ordenar(lista, comparador) : List<T>
+  }
+}
+
+package "interfaz" {
+  class VentanaPrincipal {
+    - sistema : SistemaSECR
+  }
+}
+
+VentanaPrincipal --> "1" SistemaSECR
+SistemaSECR "1" *-- "1" GestorConductores
+SistemaSECR "1" *-- "1" GestorEventos
+SistemaSECR "1" *-- "1" GestorRiesgo
+SistemaSECR "1" *-- "1" GestorCursos
+SistemaSECR "1" *-- "1" GestorReportes
+
+GestorConductores "1" *-- "1" Trie
+GestorRiesgo "1" *-- "1" MonticuloIndexado
+GestorEventos "1" *-- "1" IndiceTemporalEventos
+GestorReportes ..> OrdenamientoMezcla : usa
+
+GestorEventos ..> GestorConductores : obtiene conductor
+GestorEventos ..> GestorRiesgo : notifica deducción
+GestorCursos ..> GestorRiesgo : notifica recuperación
+GestorReportes ..> GestorRiesgo : consulta top-k
+GestorReportes ..> GestorConductores : consulta datos
+
+legend right
+  |= Color |= Significado |
+  |<#F6E7EC>| Clase reutilizada (semestre anterior) |
+  |<#EAF4EA>| Clase nueva (Progreso 2) |
+  |<#E8F0FB>| Estructura de datos propia del equipo |
+  Estereotipo <<Mx Nombre>> = módulo y responsable
+endlegend
+@enduml

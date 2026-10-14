@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1169px" preserveAspectRatio="none" style="width:1340px;height:1169px;background:#FFFFFF;" version="1.1" viewBox="0 0 1340 1169" width="1340px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.9395" id="_title" style="stroke:none;stroke-width:1.0;" width="456" x="435" y="5"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="446" x="440" y="23.5625">SECR - Módulos de negocio y estructuras de datos (Alternativa B)</text><!--MD5=[3e81cc6ee7da4fa8b6adc12b329096f6]
+cluster util--><g id="cluster_util"><path d="M50.5,177.9395 L68.5,177.9395 A3.75,3.75 0 0 1 71,180.4395 L78,198.459 L355.5,198.459 A2.5,2.5 0 0 1 358,200.959 L358,343.4395 A2.5,2.5 0 0 1 355.5,345.9395 L50.5,345.9395 A2.5,2.5 0 0 1 48,343.4395 L48,180.4395 A2.5,2.5 0 0 1 50.5,177.9395 " fill="none" style="stroke:#777777;stroke-width:1.5;"/><line style="stroke:#777777;stroke-width:1.5;" x1="48" x2="78" y1="198.459" y2="198.459"/><text fill="#000000" font-family="Arial" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="17" x="52" y="191.5645">util</text></g><!--MD5=[379a0cbf15a5e7708cc451713df3263d]
+cluster negocio--><g id="cluster_negocio"><path d="M8.5,369.9395 L55.5,369.9395 A3.75,3.75 0 0 1 58,372.4395 L65,390.459 L1195.5,390.459 A2.5,2.5 0 0 1 1198,392.959 L1198,800.4395 A2.5,2.5 0 0 1 1195.5,802.9395 L8.5,802.9395 A2.5,2.5 0 0 1 6,800.4395 L6,372.4395 A2.5,2.5 0 0 1 8.5,369.9395 " fill="none" style="stroke:#777777;stroke-width:1.5;"/><line style="stroke:#777777;stroke-width:1.5;" x1="6" x2="65" y1="390.459" y2="390.459"/><text fill="#000000" font-family="Arial" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="46" x="10" y="383.5645">negocio</text></g><!--MD5=[6500745f1aa6fe720d0e5fd89a71d44f]
+cluster estructuras--><g id="cluster_estructuras"><path d="M46.5,826.9395 L114.5,826.9395 A3.75,3.75 0 0 1 117,829.4395 L124,847.459 L1330.5,847.459 A2.5,2.5 0 0 1 1333,849.959 L1333,1030.4395 A2.5,2.5 0 0 1 1330.5,1032.9395 L46.5,1032.9395 A2.5,2.5 0 0 1 44,1030.4395 L44,829.4395 A2.5,2.5 0 0 1 46.5,826.9395 " fill="none" style="stroke:#777777;stroke-width:1.5;"/><line style="stroke:#777777;stroke-width:1.5;" x1="44" x2="124" y1="847.459" y2="847.459"/><text fill="#000000" font-family="Arial" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="67" x="48" y="840.5645">estructuras</text></g><!--MD5=[94013a8cf1f426b301ac59205872dd40]
+cluster interfaz--><g id="cluster_interfaz"><path d="M115.5,43.9395 L161.5,43.9395 A3.75,3.75 0 0 1 164,46.4395 L171,64.459 L290.5,64.459 A2.5,2.5 0 0 1 293,66.959 L293,151.4395 A2.5,2.5 0 0 1 290.5,153.9395 L115.5,153.9395 A2.5,2.5 0 0 1 113,151.4395 L113,46.4395 A2.5,2.5 0 0 1 115.5,43.9395 " fill="none" style="stroke:#777777;stroke-width:1.5;"/><line style="stroke:#777777;stroke-width:1.5;" x1="113" x2="171" y1="64.459" y2="64.459"/><text fill="#000000" font-family="Arial" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="45" x="117" y="57.5645">interfaz</text></g><!--MD5=[a71172b5471f97e87a95aa55e5e2f5e3]
+class SistemaSECR--><g id="elem_SistemaSECR"><rect codeLine="31" fill="#FFFFFF" height="118.5977" id="SistemaSECR" rx="2.5" ry="2.5" style="stroke:#8C1D40;stroke-width:0.5;" width="277" x="64.5" y="210.9395"/><ellipse cx="160" cy="225.9395" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M161.8281,230.1895 Q161.4219,230.3926 160.9688,230.502 Q160.5156,230.6113 160.0313,230.6113 Q158.25,230.6113 157.3125,229.4551 Q156.3906,228.2832 156.3906,226.0801 Q156.3906,223.8613 157.3125,222.7051 Q158.25,221.5332 160.0313,221.5332 Q160.5156,221.5332 160.9688,221.6426 Q161.4375,221.7363 161.8281,221.9551 L161.8281,223.877 Q161.3906,223.4707 160.9688,223.2832 Q160.5469,223.0801 160.1094,223.0801 Q159.1563,223.0801 158.6719,223.8457 Q158.1875,224.5957 158.1875,226.0801 Q158.1875,227.5488 158.6719,228.2988 Q159.1563,229.0488 160.1094,229.0488 Q160.5469,229.0488 160.9688,228.8613 Q161.3906,228.6738 161.8281,228.2676 L161.8281,230.1895 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="78" x="179" y="230.3047">SistemaSECR</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="65.5" x2="340.5" y1="240.9395" y2="240.9395"/><line style="stroke:#8C1D40;stroke-width:0.5;" x1="65.5" x2="340.5" y1="248.9395" y2="248.9395"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="265" x="70.5" y="264.5645">+getGestorConductores() : GestorConductores</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="209" x="70.5" y="279.084">+getGestorEventos() : GestorEventos</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="195" x="70.5" y="293.6035">+getGestorRiesgo() : GestorRiesgo</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="199" x="70.5" y="308.123">+getGestorCursos() : GestorCursos</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="221" x="70.5" y="322.6426">+getGestorReportes() : GestorReportes</text></g><!--MD5=[07fe291f74fbb9236f080f0a7be0d36e]
+class GestorConductores--><g id="elem_GestorConductores"><rect codeLine="41" fill="#FFFFFF" height="156.6758" id="GestorConductores" rx="2.5" ry="2.5" style="stroke:#8C1D40;stroke-width:0.5;" width="361" x="21.5" y="629.9395"/><ellipse cx="139.5" cy="649.459" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M141.3281,653.709 Q140.9219,653.9121 140.4688,654.0215 Q140.0156,654.1309 139.5313,654.1309 Q137.75,654.1309 136.8125,652.9746 Q135.8906,651.8027 135.8906,649.5996 Q135.8906,647.3809 136.8125,646.2246 Q137.75,645.0527 139.5313,645.0527 Q140.0156,645.0527 140.4688,645.1621 Q140.9375,645.2559 141.3281,645.4746 L141.3281,647.3965 Q140.8906,646.9902 140.4688,646.8027 Q140.0469,646.5996 139.6094,646.5996 Q138.6563,646.5996 138.1719,647.3652 Q137.6875,648.1152 137.6875,649.5996 Q137.6875,651.0684 138.1719,651.8184 Q138.6563,652.5684 139.6094,652.5684 Q140.0469,652.5684 140.4688,652.3809 Q140.8906,652.1934 141.3281,651.7871 L141.3281,653.709 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="121" x="156.5" y="646.5645">«M1 Mateo Vasquez»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="111" x="161.5" y="661.084">GestorConductores</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="22.5" x2="381.5" y1="668.9785" y2="668.9785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="256" x="27.5" y="684.6035">-conductores : HashMap&lt;String, Conductor&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="124" x="27.5" y="699.123">-indiceNombres : Trie</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="22.5" x2="381.5" y1="706.0176" y2="706.0176"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="255" x="27.5" y="721.6426">+registrarConductor(c : Conductor) : boolean</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="248" x="27.5" y="736.1621">+buscarPorLicencia(lic : String) : Conductor</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="349" x="27.5" y="750.6816">+buscarPorPrefijoNombre(p : String, k : int) : List&lt;Conductor&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="250" x="27.5" y="765.2012">+filtrar(categoria, estado) : List&lt;Conductor&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="289" x="27.5" y="779.7207">+renovarLicencia(lic : String) : RenovacionLicencia</text></g><!--MD5=[f71e8b733bf3dc5da1c0cbc62c31a5c1]
+class GestorEventos--><g id="elem_GestorEventos"><rect codeLine="51" fill="#FFFFFF" height="156.6758" id="GestorEventos" rx="2.5" ry="2.5" style="stroke:#8C1D40;stroke-width:0.5;" width="360" x="444" y="402.9395"/><ellipse cx="572.5" cy="422.459" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M574.3281,426.709 Q573.9219,426.9121 573.4688,427.0215 Q573.0156,427.1309 572.5313,427.1309 Q570.75,427.1309 569.8125,425.9746 Q568.8906,424.8027 568.8906,422.5996 Q568.8906,420.3809 569.8125,419.2246 Q570.75,418.0527 572.5313,418.0527 Q573.0156,418.0527 573.4688,418.1621 Q573.9375,418.2559 574.3281,418.4746 L574.3281,420.3965 Q573.8906,419.9902 573.4688,419.8027 Q573.0469,419.5996 572.6094,419.5996 Q571.6563,419.5996 571.1719,420.3652 Q570.6875,421.1152 570.6875,422.5996 Q570.6875,424.0684 571.1719,424.8184 Q571.6563,425.5684 572.6094,425.5684 Q573.0469,425.5684 573.4688,425.3809 Q573.8906,425.1934 574.3281,424.7871 L574.3281,426.709 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="99" x="589.5" y="419.5645">«M2 Alex Palma»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="83" x="597.5" y="434.084">GestorEventos</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="445" x2="803" y1="441.9785" y2="441.9785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="181" x="450" y="457.6035">-tiposEvento : List&lt;TipoEvento&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="224" x="450" y="472.123">-indiceFechas : IndiceTemporalEventos</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="445" x2="803" y1="479.0176" y2="479.0176"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="167" x="450" y="494.6426">+registrarEvento(...) : boolean</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="348" x="450" y="509.1621">+consultarPorRango(desde, hasta) : List&lt;EventoConduccion&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="312" x="450" y="523.6816">+ordenarPorGravedad(lista) : List&lt;EventoConduccion&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="181" x="450" y="538.2012">+infraccionMasComun() : String</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="237" x="450" y="552.7207">+ubicacionesCriticas(k : int) : List&lt;String&gt;</text></g><!--MD5=[cd1d0fb954dcab0d4c4b23b26b0d7f04]
+class GestorRiesgo--><g id="elem_GestorRiesgo"><rect codeLine="61" fill="#EAF4EA" height="142.1563" id="GestorRiesgo" rx="2.5" ry="2.5" style="stroke:#8C1D40;stroke-width:0.5;" width="321" x="442.5" y="637.4395"/><ellipse cx="543.5" cy="656.959" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M545.3281,661.209 Q544.9219,661.4121 544.4688,661.5215 Q544.0156,661.6309 543.5313,661.6309 Q541.75,661.6309 540.8125,660.4746 Q539.8906,659.3027 539.8906,657.0996 Q539.8906,654.8809 540.8125,653.7246 Q541.75,652.5527 543.5313,652.5527 Q544.0156,652.5527 544.4688,652.6621 Q544.9375,652.7559 545.3281,652.9746 L545.3281,654.8965 Q544.8906,654.4902 544.4688,654.3027 Q544.0469,654.0996 543.6094,654.0996 Q542.6563,654.0996 542.1719,654.8652 Q541.6875,655.6152 541.6875,657.0996 Q541.6875,658.5684 542.1719,659.3184 Q542.6563,660.0684 543.6094,660.0684 Q544.0469,660.0684 544.4688,659.8809 Q544.8906,659.6934 545.3281,659.2871 L545.3281,661.209 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="115" x="560.5" y="654.0645">«M3 Martín Jurado»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="76" x="580" y="668.584">GestorRiesgo</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="443.5" x2="762.5" y1="676.4785" y2="676.4785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="179" x="448.5" y="692.1035">-monticulo : MonticuloIndexado</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="443.5" x2="762.5" y1="698.998" y2="698.998"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="240" x="448.5" y="714.623">+recalcularPuntaje(c : Conductor) : double</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="309" x="448.5" y="729.1426">+actualizarPrioridad(lic : String, puntaje : double) : void</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="207" x="448.5" y="743.6621">+topRiesgo(k : int) : List&lt;Conductor&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="285" x="448.5" y="758.1816">+clasificarSemaforo(puntaje : double) : NivelAlerta</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="204" x="448.5" y="772.7012">+aplicarBonificacion(lic : String) : int</text></g><!--MD5=[a0cf51c2e094a3c70e7e2308091b0cfc]
+class GestorCursos--><g id="elem_GestorCursos"><rect codeLine="70" fill="#FFFFFF" height="156.6758" id="GestorCursos" rx="2.5" ry="2.5" style="stroke:#8C1D40;stroke-width:0.5;" width="362" x="22" y="402.9395"/><ellipse cx="143" cy="422.459" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M144.8281,426.709 Q144.4219,426.9121 143.9688,427.0215 Q143.5156,427.1309 143.0313,427.1309 Q141.25,427.1309 140.3125,425.9746 Q139.3906,424.8027 139.3906,422.5996 Q139.3906,420.3809 140.3125,419.2246 Q141.25,418.0527 143.0313,418.0527 Q143.5156,418.0527 143.9688,418.1621 Q144.4375,418.2559 144.8281,418.4746 L144.8281,420.3965 Q144.3906,419.9902 143.9688,419.8027 Q143.5469,419.5996 143.1094,419.5996 Q142.1563,419.5996 141.6719,420.3652 Q141.1875,421.1152 141.1875,422.5996 Q141.1875,424.0684 141.6719,424.8184 Q142.1563,425.5684 143.1094,425.5684 Q143.5469,425.5684 143.9688,425.3809 Q144.3906,425.1934 144.8281,424.7871 L144.8281,426.709 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="116" x="160" y="419.5645">«M4 Amelio Macas»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="78" x="179" y="434.084">GestorCursos</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="23" x2="383" y1="441.9785" y2="441.9785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="235" x="28" y="457.6035">-cursos : LinkedHashMap&lt;String, Curso&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="295" x="28" y="472.123">-colaInscripciones : ArrayDeque&lt;InscripcionCurso&gt;</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="23" x2="383" y1="479.0176" y2="479.0176"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="324" x="28" y="494.6426">+inscribir(c : Conductor, curso : Curso) : InscripcionCurso</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="350" x="28" y="509.1621">+asignarCupos(codigoCurso : String) : List&lt;InscripcionCurso&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="295" x="28" y="523.6816">+generarPruebaAleatoria(curso, n) : List&lt;Pregunta&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="162" x="28" y="538.2012">+calificarPrueba(...) : Prueba</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="168" x="28" y="552.7207">+reporteMejorCurso() : String</text></g><!--MD5=[f58f70b2857da226bbe1d33dde7025e4]
+class GestorReportes--><g id="elem_GestorReportes"><rect codeLine="80" fill="#FFFFFF" height="127.6367" id="GestorReportes" rx="2.5" ry="2.5" style="stroke:#8C1D40;stroke-width:0.5;" width="318" x="864" y="417.4395"/><ellipse cx="969.5" cy="436.959" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M971.3281,441.209 Q970.9219,441.4121 970.4688,441.5215 Q970.0156,441.6309 969.5313,441.6309 Q967.75,441.6309 966.8125,440.4746 Q965.8906,439.3027 965.8906,437.0996 Q965.8906,434.8809 966.8125,433.7246 Q967.75,432.5527 969.5313,432.5527 Q970.0156,432.5527 970.4688,432.6621 Q970.9375,432.7559 971.3281,432.9746 L971.3281,434.8965 Q970.8906,434.4902 970.4688,434.3027 Q970.0469,434.0996 969.6094,434.0996 Q968.6563,434.0996 968.1719,434.8652 Q967.6875,435.6152 967.6875,437.0996 Q967.6875,438.5684 968.1719,439.3184 Q968.6563,440.0684 969.6094,440.0684 Q970.0469,440.0684 970.4688,439.8809 Q970.8906,439.6934 971.3281,439.2871 L971.3281,441.209 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="103" x="986.5" y="434.0645">«M5 Israel Zurita»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="89" x="993.5" y="448.584">GestorReportes</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="865" x2="1181" y1="456.4785" y2="456.4785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="243" x="870" y="472.1035">-colaCaducidad : PriorityQueue&lt;Licencia&gt;</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="865" x2="1181" y1="478.998" y2="478.998"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="279" x="870" y="494.623">+generarReporteIndividual(c : Conductor) : String</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="217" x="870" y="509.1426">+generarReporteGeneral(lista) : String</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="306" x="870" y="523.6621">+alertasCaducidadPriorizadas(dias : int) : List&lt;Alerta&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="287" x="870" y="538.1816">+ordenarReporte(lista, criterios) : List&lt;Conductor&gt;</text></g><!--MD5=[546fb56c0be9f87e8d73979cbab93d0a]
+class Trie--><g id="elem_Trie"><rect codeLine="90" fill="#E8F0FB" height="113.1172" id="Trie" rx="2.5" ry="2.5" style="stroke:#1F4E8C;stroke-width:0.5;" width="289" x="59.5" y="881.9395"/><ellipse cx="165.5" cy="901.459" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M167.3281,905.709 Q166.9219,905.9121 166.4688,906.0215 Q166.0156,906.1309 165.5313,906.1309 Q163.75,906.1309 162.8125,904.9746 Q161.8906,903.8027 161.8906,901.5996 Q161.8906,899.3809 162.8125,898.2246 Q163.75,897.0527 165.5313,897.0527 Q166.0156,897.0527 166.4688,897.1621 Q166.9375,897.2559 167.3281,897.4746 L167.3281,899.3965 Q166.8906,898.9902 166.4688,898.8027 Q166.0469,898.5996 165.6094,898.5996 Q164.6563,898.5996 164.1719,899.3652 Q163.6875,900.1152 163.6875,901.5996 Q163.6875,903.0684 164.1719,903.8184 Q164.6563,904.5684 165.6094,904.5684 Q166.0469,904.5684 166.4688,904.3809 Q166.8906,904.1934 167.3281,903.7871 L167.3281,905.709 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="73" x="182.5" y="898.5645">«estructura»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="23" x="207.5" y="913.084">Trie</text><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="60.5" x2="347.5" y1="920.9785" y2="920.9785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="67" x="65.5" y="936.6035">-raiz : Nodo</text><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="60.5" x2="347.5" y1="943.498" y2="943.498"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="218" x="65.5" y="959.123">+insertarNombre(nombre, valor) : void</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="220" x="65.5" y="973.6426">+eliminarNombre(nombre, valor) : void</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="277" x="65.5" y="988.1621">+buscarPorPrefijo(p : String, k : int) : List&lt;String&gt;</text></g><!--MD5=[5b478c8217f925af1f74ad5c1bf49476]
+class MonticuloIndexado--><g id="elem_MonticuloIndexado"><rect codeLine="96" fill="#E8F0FB" height="156.6758" id="MonticuloIndexado" rx="2.5" ry="2.5" style="stroke:#1F4E8C;stroke-width:0.5;" width="206" x="409" y="859.9395"/><ellipse cx="454" cy="879.459" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M455.8281,883.709 Q455.4219,883.9121 454.9688,884.0215 Q454.5156,884.1309 454.0313,884.1309 Q452.25,884.1309 451.3125,882.9746 Q450.3906,881.8027 450.3906,879.5996 Q450.3906,877.3809 451.3125,876.2246 Q452.25,875.0527 454.0313,875.0527 Q454.5156,875.0527 454.9688,875.1621 Q455.4375,875.2559 455.8281,875.4746 L455.8281,877.3965 Q455.3906,876.9902 454.9688,876.8027 Q454.5469,876.5996 454.1094,876.5996 Q453.1563,876.5996 452.6719,877.3652 Q452.1875,878.1152 452.1875,879.5996 Q452.1875,881.0684 452.6719,881.8184 Q453.1563,882.5684 454.1094,882.5684 Q454.5469,882.5684 454.9688,882.3809 Q455.3906,882.1934 455.8281,881.7871 L455.8281,883.709 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="73" x="490.5" y="876.5645">«estructura»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="108" x="473" y="891.084">MonticuloIndexado</text><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="410" x2="614" y1="898.9785" y2="898.9785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="122" x="415" y="914.6035">-claves : List&lt;String&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="155" x="415" y="929.123">-prioridades : List&lt;Double&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="183" x="415" y="943.6426">-posicion : Map&lt;String, Integer&gt;</text><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="410" x2="614" y1="950.5371" y2="950.5371"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="181" x="415" y="966.1621">+insertar(clave, prioridad) : void</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="194" x="415" y="980.6816">+actualizar(clave, prioridad) : void</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="143" x="415" y="995.2012">+extraerMinimo() : String</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="151" x="415" y="1009.7207">+topK(k : int) : List&lt;String&gt;</text></g><!--MD5=[369c147721ebf19faeee6232f3e5a2bb]
+class IndiceTemporalEventos--><g id="elem_IndiceTemporalEventos"><rect codeLine="105" fill="#E8F0FB" height="98.5977" id="IndiceTemporalEventos" rx="2.5" ry="2.5" style="stroke:#1F4E8C;stroke-width:0.5;" width="356" x="675" y="888.9395"/><ellipse cx="782" cy="908.459" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M783.8281,912.709 Q783.4219,912.9121 782.9688,913.0215 Q782.5156,913.1309 782.0313,913.1309 Q780.25,913.1309 779.3125,911.9746 Q778.3906,910.8027 778.3906,908.5996 Q778.3906,906.3809 779.3125,905.2246 Q780.25,904.0527 782.0313,904.0527 Q782.5156,904.0527 782.9688,904.1621 Q783.4375,904.2559 783.8281,904.4746 L783.8281,906.3965 Q783.3906,905.9902 782.9688,905.8027 Q782.5469,905.5996 782.1094,905.5996 Q781.1563,905.5996 780.6719,906.3652 Q780.1875,907.1152 780.1875,908.5996 Q780.1875,910.0684 780.6719,910.8184 Q781.1563,911.5684 782.1094,911.5684 Q782.5469,911.5684 782.9688,911.3809 Q783.3906,911.1934 783.8281,910.7871 L783.8281,912.709 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="73" x="831.5" y="905.5645">«estructura»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="134" x="801" y="920.084">IndiceTemporalEventos</text><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="676" x2="1030" y1="927.9785" y2="927.9785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="344" x="681" y="943.6035">-porFecha : TreeMap&lt;LocalDate, List&lt;EventoConduccion&gt;&gt;</text><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="676" x2="1030" y1="950.498" y2="950.498"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="217" x="681" y="966.123">+agregar(e : EventoConduccion) : void</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="328" x="681" y="980.6426">+consultarRango(desde, hasta) : List&lt;EventoConduccion&gt;</text></g><!--MD5=[66d8ccf1aca680d68b781bd54b018b26]
+class OrdenamientoMezcla--><g id="elem_OrdenamientoMezcla"><rect codeLine="110" fill="#E8F0FB" height="69.5586" id="OrdenamientoMezcla" rx="2.5" ry="2.5" style="stroke:#1F4E8C;stroke-width:0.5;" width="225" x="1091.5" y="903.4395"/><ellipse cx="1138.5" cy="922.959" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M1140.3281,927.209 Q1139.9219,927.4121 1139.4688,927.5215 Q1139.0156,927.6309 1138.5313,927.6309 Q1136.75,927.6309 1135.8125,926.4746 Q1134.8906,925.3027 1134.8906,923.0996 Q1134.8906,920.8809 1135.8125,919.7246 Q1136.75,918.5527 1138.5313,918.5527 Q1139.0156,918.5527 1139.4688,918.6621 Q1139.9375,918.7559 1140.3281,918.9746 L1140.3281,920.8965 Q1139.8906,920.4902 1139.4688,920.3027 Q1139.0469,920.0996 1138.6094,920.0996 Q1137.6563,920.0996 1137.1719,920.8652 Q1136.6875,921.6152 1136.6875,923.0996 Q1136.6875,924.5684 1137.1719,925.3184 Q1137.6563,926.0684 1138.6094,926.0684 Q1139.0469,926.0684 1139.4688,925.8809 Q1139.8906,925.6934 1140.3281,925.2871 L1140.3281,927.209 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="73" x="1182.5" y="920.0645">«estructura»</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="123" x="1157.5" y="934.584">OrdenamientoMezcla</text><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="1092.5" x2="1315.5" y1="942.4785" y2="942.4785"/><line style="stroke:#1F4E8C;stroke-width:0.5;" x1="1092.5" x2="1315.5" y1="950.4785" y2="950.4785"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" text-decoration="underline" textLength="213" x="1097.5" y="966.1035">+ordenar(lista, comparador) : List&lt;T&gt;</text></g><!--MD5=[f7631d5be13eb9764df803027be807bc]
+class VentanaPrincipal--><g id="elem_VentanaPrincipal"><rect codeLine="116" fill="#FFFFFF" height="60.5195" id="VentanaPrincipal" rx="2.5" ry="2.5" style="stroke:#8C1D40;stroke-width:0.5;" width="149" x="128.5" y="76.9395"/><ellipse cx="152.4" cy="91.9395" fill="#ADD1B2" rx="10" ry="10" style="stroke:#181818;stroke-width:1.0;"/><path d="M154.2281,96.1895 Q153.8219,96.3926 153.3688,96.502 Q152.9156,96.6113 152.4313,96.6113 Q150.65,96.6113 149.7125,95.4551 Q148.7906,94.2832 148.7906,92.0801 Q148.7906,89.8613 149.7125,88.7051 Q150.65,87.5332 152.4313,87.5332 Q152.9156,87.5332 153.3688,87.6426 Q153.8375,87.7363 154.2281,87.9551 L154.2281,89.877 Q153.7906,89.4707 153.3688,89.2832 Q152.9469,89.0801 152.5094,89.0801 Q151.5563,89.0801 151.0719,89.8457 Q150.5875,90.5957 150.5875,92.0801 Q150.5875,93.5488 151.0719,94.2988 Q151.5563,95.0488 152.5094,95.0488 Q152.9469,95.0488 153.3688,94.8613 Q153.7906,94.6738 154.2281,94.2676 L154.2281,96.1895 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="97" x="167.6" y="96.3047">VentanaPrincipal</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="129.5" x2="276.5" y1="106.9395" y2="106.9395"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="137" x="134.5" y="122.5645">-sistema : SistemaSECR</text><line style="stroke:#8C1D40;stroke-width:0.5;" x1="129.5" x2="276.5" y1="129.459" y2="129.459"/></g><!--MD5=[8083b4757e1fb1e14fd8de7506382077]
+link VentanaPrincipal to SistemaSECR--><g id="link_VentanaPrincipal_SistemaSECR"><path codeLine="121" d="M203,138.0995 C203,138.0995 203,205.8695 203,205.8695 " fill="none" id="VentanaPrincipal-to-SistemaSECR" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="203,210.8695,207,201.8695,203,205.8695,199,201.8695,203,210.8695" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="197.6797" y="200.0242">1</text></g><!--MD5=[c4426602ece3755fb4887ede1e218b26]
+reverse link SistemaSECR to GestorConductores--><g id="link_SistemaSECR_GestorConductores"><path codeLine="122" d="M354.57,306.9395 C354.57,306.9395 396.5,306.9395 396.5,306.9395 C396.5,306.9395 396.5,631.9395 396.5,631.9395 C396.5,631.9395 391.26,631.9395 382.51,631.9395 " fill="none" id="SistemaSECR-backto-GestorConductores" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="341.57,306.9395,347.57,310.9395,353.57,306.9395,347.57,302.9395,341.57,306.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="349.2848" y="306.2029">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="390.2307" y="626.0596">1</text></g><!--MD5=[3d877738bbcf23346caea2a1cc691733]
+reverse link SistemaSECR to GestorEventos--><g id="link_SistemaSECR_GestorEventos"><path codeLine="123" d="M354.73,258.9395 C354.73,258.9395 624,258.9395 624,258.9395 C624,258.9395 624,338.6795 624,402.6795 " fill="none" id="SistemaSECR-backto-GestorEventos" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="341.73,258.9395,347.73,262.9395,353.73,258.9395,347.73,254.9395,341.73,258.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="349.4535" y="255.5779">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="618.7617" y="392.1707">1</text></g><!--MD5=[0e321513f2eb73ef90ab1f4b3ba986c2]
+reverse link SistemaSECR to GestorRiesgo--><g id="link_SistemaSECR_GestorRiesgo"><path codeLine="124" d="M354.73,282.9395 C354.73,282.9395 402.75,282.9395 402.75,282.9395 C402.75,282.9395 402.75,684.9395 402.75,684.9395 C402.75,684.9395 419.03,684.9395 442.31,684.9395 " fill="none" id="SistemaSECR-backto-GestorRiesgo" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="341.73,282.9395,347.73,286.9395,353.73,282.9395,347.73,278.9395,341.73,282.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="349.4535" y="280.8904">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="429.4055" y="681.0959">1</text></g><!--MD5=[625afbafb207c8767452d61a323c1d9b]
+reverse link SistemaSECR to GestorCursos--><g id="link_SistemaSECR_GestorCursos"><path codeLine="125" d="M203,343.0595 C203,343.0595 203,402.6595 203,402.6595 " fill="none" id="SistemaSECR-backto-GestorCursos" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="203,330.0595,199,336.0595,203,342.0595,207,336.0595,203,330.0595" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="197.7266" y="349.0214">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="197.7617" y="392.1488">1</text></g><!--MD5=[55c816da3dd5e60961efe597be17ee0c]
+reverse link SistemaSECR to GestorReportes--><g id="link_SistemaSECR_GestorReportes"><path codeLine="126" d="M354.64,234.9395 C354.64,234.9395 1023,234.9395 1023,234.9395 C1023,234.9395 1023,344.2795 1023,417.3195 " fill="none" id="SistemaSECR-backto-GestorReportes" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="341.64,234.9395,347.64,238.9395,353.64,234.9395,347.64,230.9395,341.64,234.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="349.3586" y="230.2654">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="1017.6953" y="406.3305">1</text></g><!--MD5=[4ab07120c6b0d4d59b156c5860193ab9]
+reverse link GestorConductores to Trie--><g id="link_GestorConductores_Trie"><path codeLine="128" d="M204,799.9495 C204,799.9495 204,881.6895 204,881.6895 " fill="none" id="GestorConductores-backto-Trie" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="204,786.9495,200,792.9495,204,798.9495,208,792.9495,204,786.9495" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="198.9555" y="806.2278">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="198.6797" y="871.1723">1</text></g><!--MD5=[0a8833582416e933a02326324810158f]
+reverse link GestorRiesgo to MonticuloIndexado--><g id="link_GestorRiesgo_MonticuloIndexado"><path codeLine="129" d="M528.75,792.6395 C528.75,792.6395 528.75,859.5695 528.75,859.5695 " fill="none" id="GestorRiesgo-backto-MonticuloIndexado" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="528.75,779.6395,524.75,785.6395,528.75,791.6395,532.75,785.6395,528.75,779.6395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="515.8352" y="799.3476">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="525.1082" y="849.0502">1</text></g><!--MD5=[9e14e1982f50a21a27cba44f60da4520]
+reverse link GestorEventos to IndiceTemporalEventos--><g id="link_GestorEventos_IndiceTemporalEventos"><path codeLine="130" d="M783.75,572.9995 C783.75,572.9995 783.75,888.7295 783.75,888.7295 " fill="none" id="GestorEventos-backto-IndiceTemporalEventos" style="stroke:#333333;stroke-width:1.0;"/><polygon fill="#333333" points="783.75,559.9995,779.75,565.9995,783.75,571.9995,787.75,565.9995,783.75,559.9995" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="792.7551" y="579.2822">1</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="5" x="768.2117" y="878.0929">1</text></g><!--MD5=[415c3cee00dc105bf962b39c768030b5]
+link GestorReportes to OrdenamientoMezcla--><g id="link_GestorReportes_OrdenamientoMezcla"><path codeLine="131" d="M1136.75,545.4695 C1136.75,545.4695 1136.75,898.2095 1136.75,898.2095 " fill="none" id="GestorReportes-to-OrdenamientoMezcla" style="stroke:#333333;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#333333" points="1136.75,903.2095,1140.75,894.2095,1136.75,898.2095,1132.75,894.2095,1136.75,903.2095" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="20" x="1115.75" y="718.4645">usa</text></g><!--MD5=[b6f6a89b4a34f22cedc14c16a345effb]
+link GestorEventos to GestorConductores--><g id="link_GestorEventos_GestorConductores"><path codeLine="133" d="M550.5,560.3695 C550.5,597.5795 550.5,633.9395 550.5,633.9395 C550.5,633.9395 387.63,633.9395 387.63,633.9395 " fill="none" id="GestorEventos-to-GestorConductores" style="stroke:#333333;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#333333" points="382.63,633.9395,391.63,637.9395,387.63,633.9395,391.63,629.9395,382.63,633.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="103" x="401.85" y="630.5645">obtiene conductor</text></g><!--MD5=[ae5893520dada22e2a2f91080d1a3e22]
+link GestorEventos to GestorRiesgo--><g id="link_GestorEventos_GestorRiesgo"><path codeLine="134" d="M657,560.1995 C657,560.1995 657,632.4195 657,632.4195 " fill="none" id="GestorEventos-to-GestorRiesgo" style="stroke:#333333;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#333333" points="657,637.4195,661,628.4195,657,632.4195,653,628.4195,657,637.4195" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="104" x="552" y="592.9345">notifica deducción</text></g><!--MD5=[e8f61980fe08a85c72c21b0109da6e96]
+link GestorCursos to GestorRiesgo--><g id="link_GestorCursos_GestorRiesgo"><path codeLine="135" d="M384.02,481.9395 C388.01,481.9395 390.25,481.9395 390.25,481.9395 C390.25,481.9395 390.25,732.9395 390.25,732.9395 C390.25,732.9395 437.29,732.9395 437.29,732.9395 " fill="none" id="GestorCursos-to-GestorRiesgo" style="stroke:#333333;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#333333" points="442.29,732.9395,433.29,728.9395,437.29,732.9395,433.29,736.9395,442.29,732.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="121" x="268.25" y="624.4745">notifica recuperación</text></g><!--MD5=[593f9a55490112a9aa7f2af2e83f5886]
+link GestorReportes to GestorRiesgo--><g id="link_GestorReportes_GestorRiesgo"><path codeLine="136" d="M975.33,545.7195 C975.33,612.9895 975.33,708.9395 975.33,708.9395 C975.33,708.9395 768.6,708.9395 768.6,708.9395 " fill="none" id="GestorReportes-to-GestorRiesgo" style="stroke:#333333;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#333333" points="763.6,708.9395,772.6,712.9395,768.6,708.9395,772.6,704.9395,763.6,708.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="82" x="870.58" y="705.5645">consulta top-k</text></g><!--MD5=[38d6e1c768dcbf4c8a51ef0be0e28349]
+link GestorReportes to GestorConductores--><g id="link_GestorReportes_GestorConductores"><path codeLine="137" d="M919.67,545.6195 C919.67,588.0695 919.67,635.9395 919.67,635.9395 C919.67,635.9395 387.63,635.9395 387.63,635.9395 " fill="none" id="GestorReportes-to-GestorConductores" style="stroke:#333333;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#333333" points="382.63,635.9395,391.63,639.9395,387.63,635.9395,391.63,631.9395,382.63,635.9395" style="stroke:#333333;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="82" x="615.81" y="632.5645">consulta datos</text></g><rect fill="#DDDDDD" height="98.6973" id="_legend" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.0;" width="363" x="951" y="1050.9395"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="38" x="959" y="1071.502">Color</text><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="79" x="1003" y="1071.502">Significado</text><rect fill="#F6E7EC" height="16.9395" style="stroke:none;stroke-width:1.0;" width="44" x="956" y="1074.8789"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="4" x="956" y="1088.4414"> </text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="236" x="1004" y="1088.4414">Clase reutilizada (semestre anterior)</text><rect fill="#EAF4EA" height="16.9395" style="stroke:none;stroke-width:1.0;" width="44" x="956" y="1091.8184"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="4" x="956" y="1105.3809"> </text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="166" x="1004" y="1105.3809">Clase nueva (Progreso 2)</text><rect fill="#E8F0FB" height="16.9395" style="stroke:none;stroke-width:1.0;" width="44" x="956" y="1108.7578"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="4" x="956" y="1122.3203"> </text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="248" x="1004" y="1122.3203">Estructura de datos propia del equipo</text><line style="stroke:#000000;stroke-width:1.0;" x1="956" x2="1256" y1="1057.9395" y2="1057.9395"/><line style="stroke:#000000;stroke-width:1.0;" x1="956" x2="1256" y1="1074.8789" y2="1074.8789"/><line style="stroke:#000000;stroke-width:1.0;" x1="956" x2="1256" y1="1091.8184" y2="1091.8184"/><line style="stroke:#000000;stroke-width:1.0;" x1="956" x2="1256" y1="1108.7578" y2="1108.7578"/><line style="stroke:#000000;stroke-width:1.0;" x1="956" x2="1256" y1="1125.6973" y2="1125.6973"/><line style="stroke:#000000;stroke-width:1.0;" x1="956" x2="956" y1="1057.9395" y2="1125.6973"/><line style="stroke:#000000;stroke-width:1.0;" x1="1000" x2="1000" y1="1057.9395" y2="1125.6973"/><line style="stroke:#000000;stroke-width:1.0;" x1="1256" x2="1256" y1="1057.9395" y2="1125.6973"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="353" x="956" y="1141.2598">Estereotipo &lt;&lt;Mx Nombre&gt;&gt; = módulo y responsable</text><!--MD5=[d5d9c1346c162fe458d4f0fd20f011da]
+@startuml 02_negocio_estructuras
+' SECR - Capa de negocio y estructuras de datos seleccionadas (Alternativa B)
+' Programación III - Progreso 1 - Grupo 4
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #8C1D40
+  ArrowColor #333333
+}
+skinparam class<<nueva>> {
+  BackgroundColor #EAF4EA
+  BorderColor #2E7D32
+}
+skinparam class<<estructura>> {
+  BackgroundColor #E8F0FB
+  BorderColor #1F4E8C
+}
+skinparam package {
+  BorderColor #777777
+}
+
+title SECR - Módulos de negocio y estructuras de datos (Alternativa B)
+
+package "util" {
+  class SistemaSECR {
+    + getGestorConductores() : GestorConductores
+    + getGestorEventos() : GestorEventos
+    + getGestorRiesgo() : GestorRiesgo
+    + getGestorCursos() : GestorCursos
+    + getGestorReportes() : GestorReportes
+  }
+}
+
+package "negocio" {
+  class GestorConductores <<M1 Mateo Vasquez>> {
+    - conductores : HashMap<String, Conductor>
+    - indiceNombres : Trie
+    + registrarConductor(c : Conductor) : boolean
+    + buscarPorLicencia(lic : String) : Conductor
+    + buscarPorPrefijoNombre(p : String, k : int) : List<Conductor>
+    + filtrar(categoria, estado) : List<Conductor>
+    + renovarLicencia(lic : String) : RenovacionLicencia
+  }
+
+  class GestorEventos <<M2 Alex Palma>> {
+    - tiposEvento : List<TipoEvento>
+    - indiceFechas : IndiceTemporalEventos
+    + registrarEvento(...) : boolean
+    + consultarPorRango(desde, hasta) : List<EventoConduccion>
+    + ordenarPorGravedad(lista) : List<EventoConduccion>
+    + infraccionMasComun() : String
+    + ubicacionesCriticas(k : int) : List<String>
+  }
+
+  class GestorRiesgo <<M3 Martín Jurado>> #EAF4EA {
+    - monticulo : MonticuloIndexado
+    + recalcularPuntaje(c : Conductor) : double
+    + actualizarPrioridad(lic : String, puntaje : double) : void
+    + topRiesgo(k : int) : List<Conductor>
+    + clasificarSemaforo(puntaje : double) : NivelAlerta
+    + aplicarBonificacion(lic : String) : int
+  }
+
+  class GestorCursos <<M4 Amelio Macas>> {
+    - cursos : LinkedHashMap<String, Curso>
+    - colaInscripciones : ArrayDeque<InscripcionCurso>
+    + inscribir(c : Conductor, curso : Curso) : InscripcionCurso
+    + asignarCupos(codigoCurso : String) : List<InscripcionCurso>
+    + generarPruebaAleatoria(curso, n) : List<Pregunta>
+    + calificarPrueba(...) : Prueba
+    + reporteMejorCurso() : String
+  }
+
+  class GestorReportes <<M5 Israel Zurita>> {
+    - colaCaducidad : PriorityQueue<Licencia>
+    + generarReporteIndividual(c : Conductor) : String
+    + generarReporteGeneral(lista) : String
+    + alertasCaducidadPriorizadas(dias : int) : List<Alerta>
+    + ordenarReporte(lista, criterios) : List<Conductor>
+  }
+}
+
+package "estructuras" {
+  class Trie <<estructura>> {
+    - raiz : Nodo
+    + insertarNombre(nombre, valor) : void
+    + eliminarNombre(nombre, valor) : void
+    + buscarPorPrefijo(p : String, k : int) : List<String>
+  }
+  class MonticuloIndexado <<estructura>> {
+    - claves : List<String>
+    - prioridades : List<Double>
+    - posicion : Map<String, Integer>
+    + insertar(clave, prioridad) : void
+    + actualizar(clave, prioridad) : void
+    + extraerMinimo() : String
+    + topK(k : int) : List<String>
+  }
+  class IndiceTemporalEventos <<estructura>> {
+    - porFecha : TreeMap<LocalDate, List<EventoConduccion>>
+    + agregar(e : EventoConduccion) : void
+    + consultarRango(desde, hasta) : List<EventoConduccion>
+  }
+  class OrdenamientoMezcla <<estructura>> {
+    + {static} ordenar(lista, comparador) : List<T>
+  }
+}
+
+package "interfaz" {
+  class VentanaPrincipal {
+    - sistema : SistemaSECR
+  }
+}
+
+VentanaPrincipal - -> "1" SistemaSECR
+SistemaSECR "1" *- - "1" GestorConductores
+SistemaSECR "1" *- - "1" GestorEventos
+SistemaSECR "1" *- - "1" GestorRiesgo
+SistemaSECR "1" *- - "1" GestorCursos
+SistemaSECR "1" *- - "1" GestorReportes
+
+GestorConductores "1" *- - "1" Trie
+GestorRiesgo "1" *- - "1" MonticuloIndexado
+GestorEventos "1" *- - "1" IndiceTemporalEventos
+GestorReportes ..> OrdenamientoMezcla : usa
+
+GestorEventos ..> GestorConductores : obtiene conductor
+GestorEventos ..> GestorRiesgo : notifica deducción
+GestorCursos ..> GestorRiesgo : notifica recuperación
+GestorReportes ..> GestorRiesgo : consulta top-k
+GestorReportes ..> GestorConductores : consulta datos
+
+legend right
+  |= Color |= Significado |
+  |<#F6E7EC>| Clase reutilizada (semestre anterior) |
+  |<#EAF4EA>| Clase nueva (Progreso 2) |
+  |<#E8F0FB>| Estructura de datos propia del equipo |
+  Estereotipo <<Mx Nombre>> = módulo y responsable
+endlegend
+@enduml
+
+@startuml 02_negocio_estructuras
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 70
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #8C1D40
+  ArrowColor #333333
+}
+skinparam class<<nueva>> {
+  BackgroundColor #EAF4EA
+  BorderColor #2E7D32
+}
+skinparam class<<estructura>> {
+  BackgroundColor #E8F0FB
+  BorderColor #1F4E8C
+}
+skinparam package {
+  BorderColor #777777
+}
+
+title SECR - Módulos de negocio y estructuras de datos (Alternativa B)
+
+package "util" {
+  class SistemaSECR {
+    + getGestorConductores() : GestorConductores
+    + getGestorEventos() : GestorEventos
+    + getGestorRiesgo() : GestorRiesgo
+    + getGestorCursos() : GestorCursos
+    + getGestorReportes() : GestorReportes
+  }
+}
+
+package "negocio" {
+  class GestorConductores <<M1 Mateo Vasquez>> {
+    - conductores : HashMap<String, Conductor>
+    - indiceNombres : Trie
+    + registrarConductor(c : Conductor) : boolean
+    + buscarPorLicencia(lic : String) : Conductor
+    + buscarPorPrefijoNombre(p : String, k : int) : List<Conductor>
+    + filtrar(categoria, estado) : List<Conductor>
+    + renovarLicencia(lic : String) : RenovacionLicencia
+  }
+
+  class GestorEventos <<M2 Alex Palma>> {
+    - tiposEvento : List<TipoEvento>
+    - indiceFechas : IndiceTemporalEventos
+    + registrarEvento(...) : boolean
+    + consultarPorRango(desde, hasta) : List<EventoConduccion>
+    + ordenarPorGravedad(lista) : List<EventoConduccion>
+    + infraccionMasComun() : String
+    + ubicacionesCriticas(k : int) : List<String>
+  }
+
+  class GestorRiesgo <<M3 Martín Jurado>> #EAF4EA {
+    - monticulo : MonticuloIndexado
+    + recalcularPuntaje(c : Conductor) : double
+    + actualizarPrioridad(lic : String, puntaje : double) : void
+    + topRiesgo(k : int) : List<Conductor>
+    + clasificarSemaforo(puntaje : double) : NivelAlerta
+    + aplicarBonificacion(lic : String) : int
+  }
+
+  class GestorCursos <<M4 Amelio Macas>> {
+    - cursos : LinkedHashMap<String, Curso>
+    - colaInscripciones : ArrayDeque<InscripcionCurso>
+    + inscribir(c : Conductor, curso : Curso) : InscripcionCurso
+    + asignarCupos(codigoCurso : String) : List<InscripcionCurso>
+    + generarPruebaAleatoria(curso, n) : List<Pregunta>
+    + calificarPrueba(...) : Prueba
+    + reporteMejorCurso() : String
+  }
+
+  class GestorReportes <<M5 Israel Zurita>> {
+    - colaCaducidad : PriorityQueue<Licencia>
+    + generarReporteIndividual(c : Conductor) : String
+    + generarReporteGeneral(lista) : String
+    + alertasCaducidadPriorizadas(dias : int) : List<Alerta>
+    + ordenarReporte(lista, criterios) : List<Conductor>
+  }
+}
+
+package "estructuras" {
+  class Trie <<estructura>> {
+    - raiz : Nodo
+    + insertarNombre(nombre, valor) : void
+    + eliminarNombre(nombre, valor) : void
+    + buscarPorPrefijo(p : String, k : int) : List<String>
+  }
+  class MonticuloIndexado <<estructura>> {
+    - claves : List<String>
+    - prioridades : List<Double>
+    - posicion : Map<String, Integer>
+    + insertar(clave, prioridad) : void
+    + actualizar(clave, prioridad) : void
+    + extraerMinimo() : String
+    + topK(k : int) : List<String>
+  }
+  class IndiceTemporalEventos <<estructura>> {
+    - porFecha : TreeMap<LocalDate, List<EventoConduccion>>
+    + agregar(e : EventoConduccion) : void
+    + consultarRango(desde, hasta) : List<EventoConduccion>
+  }
+  class OrdenamientoMezcla <<estructura>> {
+    + {static} ordenar(lista, comparador) : List<T>
+  }
+}
+
+package "interfaz" {
+  class VentanaPrincipal {
+    - sistema : SistemaSECR
+  }
+}
+
+VentanaPrincipal - -> "1" SistemaSECR
+SistemaSECR "1" *- - "1" GestorConductores
+SistemaSECR "1" *- - "1" GestorEventos
+SistemaSECR "1" *- - "1" GestorRiesgo
+SistemaSECR "1" *- - "1" GestorCursos
+SistemaSECR "1" *- - "1" GestorReportes
+
+GestorConductores "1" *- - "1" Trie
+GestorRiesgo "1" *- - "1" MonticuloIndexado
+GestorEventos "1" *- - "1" IndiceTemporalEventos
+GestorReportes ..> OrdenamientoMezcla : usa
+
+GestorEventos ..> GestorConductores : obtiene conductor
+GestorEventos ..> GestorRiesgo : notifica deducción
+GestorCursos ..> GestorRiesgo : notifica recuperación
+GestorReportes ..> GestorRiesgo : consulta top-k
+GestorReportes ..> GestorConductores : consulta datos
+
+legend right
+  |= Color |= Significado |
+  |<#F6E7EC>| Clase reutilizada (semestre anterior) |
+  |<#EAF4EA>| Clase nueva (Progreso 2) |
+  |<#E8F0FB>| Estructura de datos propia del equipo |
+  Estereotipo <<Mx Nombre>> = módulo y responsable
+endlegend
+@enduml
+
+PlantUML version 1.2022.12(Sun Oct 23 13:12:26 COT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
