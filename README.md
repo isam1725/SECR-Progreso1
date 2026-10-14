@@ -1,6 +1,6 @@
 # SECR: Sistema de Evaluación de Conducción Responsable
 
-**ISWZ2102 · Programación III · Universidad de Las Américas (UDLA), Quito**
+**ISWZ2102 · Programación III · Ingeniería en Ciberseguridad · Universidad de Las Américas (UDLA), Quito**
 **Período 2027-1 · Grupo 4 · Avance del proyecto, Progreso 1**
 
 | Integrante | Módulo a cargo |
