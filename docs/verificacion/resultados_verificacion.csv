@@ -1,0 +1,20 @@
+caso;modulo;funcionalidad;entrada;esperado;obtenido;cumple
+VF01;M2;Registrar infracción válida (cálculo de deducción, índice AVL y pila);B-030405 · Uso de celular (4 pts) · gravedad 2 · 10/11/2026;Deducción 8 pts; puntaje 97.0 → 89.0; eventos +1; pila = 1;Deducción 8 pts; puntaje 97.0 → 89.0; eventos 16 → 17; pila = 1;Sí
+VF02;M2;Registrar infracción a una licencia inexistente;Z-999999 · Exceso de velocidad;Rechazo: no existe el conductor;Rechazado: «No existe un conductor con la licencia Z-999999.»;Sí
+VF03;M2;Registrar infracción con fecha futura;B-050607 · fecha 01/01/2030;Rechazo por fecha futura;Rechazado: «La fecha del evento no puede ser futura.»;Sí
+VF04;M2;Registrar infracción con gravedad fuera de rango;B-050607 · gravedad 6;Rechazo: la gravedad debe estar entre 1 y 5;Rechazado: «La gravedad debe estar entre 1 y 5.»;Sí
+VF05;M2;Consulta por rango de fechas (AVL por fecha);01/09/2026 a 31/10/2026, todos los conductores;4 eventos (14/09, 02/10, 15/10, 28/10) en orden cronológico;4 eventos: 14/09, 02/10, 15/10, 28/10, en orden;Sí
+VF06;M2;Consulta con rango invertido;31/10/2026 a 01/09/2026;Rechazo: fecha inicial posterior a la final;Rechazado: «La fecha inicial no puede ser posterior a la fecha final.»;Sí
+VF07;M2;Deshacer el último registro (pila LIFO);Deshacer tras VF01;Se revierte EVT de VF01; puntaje vuelve a 97.0; eventos 16; pila = 0;Revertido EVT-017; puntaje 97.0; eventos 16; pila = 0;Sí
+VF08;M2;Deshacer con la pila vacía (caso límite);Deshacer sin registros pendientes;Aviso: no hay registros para deshacer;Rechazado: «No hay registros para deshacer en esta sesión.»;Sí
+VF09;M2;Ordenar eventos por gravedad (Merge Sort);Todos los eventos (16);Primero gravedad 5; secuencia no creciente;Primero gravedad 5 (EVT-008); no creciente;Sí
+VF10;M2;Historial navegable (lista doblemente enlazada);E-040506: inicio → avanzar ×2 → retroceder;3 eventos: 20/12/2025 → 28/10/2026 → 06/06/2026; sin anterior al inicio ni siguiente al final;3 eventos: 20/12/2025 → 28/10/2026 → 06/06/2026; anterior al inicio: no; siguiente al final: no;Sí
+VF11;M2;Puntaje llega a 0: inactivación y rechazo de nuevos registros (límite);C-020304 (38.0 pts) + Conducción bajo efectos, gravedad 4 (−40);Puntaje 0; estado Inactivo; nuevo registro rechazado; al deshacer vuelve a Activo con 38.0;Puntaje 0; estado Inactivo; nuevo registro: rechazado; tras deshacer: Activo con 38.0;Sí
+VF12;M3;Top-k de mayor riesgo (recorrido en orden del AVL);k = 3;Los 3 menores puntajes: E-040506, C-020304, C-009012;E-040506, C-020304, C-009012;Sí
+VF13;M3;Top-k con k mayor que el número de conductores (límite);k = 50 con 12 conductores;Devuelve los 12 conductores, ordenados;12 conductores; orden correcto;Sí
+VF14;M3;Top-k con valor inválido;k = 0;Rechazo: k debe estar entre 1 y 100;Rechazado: «El valor de k debe estar entre 1 y 100.»;Sí
+VF15;M3;Posición de un conductor en el ranking (AVL con tamaño de subárbol);b-050607 (en minúsculas);Posición 11 de 12;Posición 11 de 12;Sí
+VF16;M3;Posición de una licencia inexistente;B-999999;Rechazo: no existe en el ranking;Rechazado: «No existe un conductor con la licencia B-999999 en el ranking.»;Sí
+VF17;M3;Filtro por semáforo rojo (consulta de rango en el AVL);Nivel ROJO (puntaje < 40);2 conductores: E-040506, C-020304;2 conductores: E-040506, C-020304;Sí
+VF18;M3;Reubicación automática al registrar y al deshacer (integración M2 → M3);B-050607 recibe Conducción bajo efectos, gravedad 4 (−40); luego se deshace;Sube de la posición 11 a la 4; al deshacer vuelve a la 11;Posición 11 → 4 → 11;Sí
+VF19;M3;Conteo por nivel del semáforo;Todos los conductores;Suma de niveles = 12;Rojo 2, naranja 0, amarillo 2, verde 8 (suma 12);Sí

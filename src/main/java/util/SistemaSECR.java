@@ -11,12 +11,15 @@ public class SistemaSECR {
     private GestorEventos gestorEventos;
     private GestorCursos gestorCursos;
     private GestorReportes gestorReportes;
+    private GestorRiesgo gestorRiesgo;
 
     public SistemaSECR() {
         gestorConductores = new GestorConductores();
         gestorEventos = new GestorEventos();
         gestorCursos = new GestorCursos();
         gestorReportes = new GestorReportes();
+        gestorRiesgo = new GestorRiesgo();
+        gestorEventos.setGestorRiesgo(gestorRiesgo);   // M2 avisa a M3 cada cambio de puntaje
     }
 
     public void cargarDatosPrueba() {
@@ -42,15 +45,55 @@ public class SistemaSECR {
             Conductor c5 = new Conductor("0945678902", "Pedro Gutiérrez Loor", LocalDate.of(1970, 9, 25), lic5);
             gestorConductores.registrarConductor(c5);
 
+            cargarConductoresAdicionales();
             cargarEventosPrueba();
             gestorConductores.aplicarBonificacionATodos();
+            gestorRiesgo.sincronizar(gestorConductores);   // M3: ranking inicial
+            gestorEventos.limpiarHistorialDeshacer();      // los datos de prueba no se pueden deshacer
             System.out.println("✅ Datos de prueba cargados correctamente.\n");
         } catch (SecrException e) {
             System.out.println("❌ Error al cargar datos de prueba: " + e.getMessage());
         }
     }
 
+    /** Conductores adicionales para que el ranking de riesgo (M3) tenga casos de todos los niveles. */
+    private void cargarConductoresAdicionales() throws SecrException {
+        Object[][] datos = {
+            {"B-010203", "B", LocalDate.of(2022, 5, 10), "1703456788", "Valentina Andrade Cevallos", LocalDate.of(1995, 4, 2)},
+            {"C-020304", "C", LocalDate.of(2021, 2, 14), "1712345600", "Diego Herrera Salazar", LocalDate.of(1987, 10, 21)},
+            {"B-030405", "B", LocalDate.of(2024, 1, 8), "1723456719", "Gabriela Paredes Moreno", LocalDate.of(2000, 12, 3)},
+            {"E-040506", "E", LocalDate.of(2020, 8, 22), "0908765431", "Jorge Espinoza Pazmiño", LocalDate.of(1975, 6, 30)},
+            {"B-050607", "B", LocalDate.of(2023, 6, 1), "1304567892", "Lucía Chávez Aguirre", LocalDate.of(1992, 3, 17)},
+            {"C-060708", "C", LocalDate.of(2022, 11, 11), "1109876548", "Andrés Guerrero Loor", LocalDate.of(1984, 8, 9)},
+            {"B-070809", "B", LocalDate.of(2025, 2, 2), "1711223345", "Paula Moreno Zambrano", LocalDate.of(2003, 1, 25)},
+        };
+        for (Object[] d : datos) {
+            LocalDate emision = (LocalDate) d[2];
+            Licencia lic = new Licencia((String) d[0], (String) d[1], emision, emision.plusYears(5));
+            gestorConductores.registrarConductor(new Conductor((String) d[3], (String) d[4], (LocalDate) d[5], lic));
+        }
+    }
+
     private void cargarEventosPrueba() throws SecrException {
+        // Índices de tipo: 0 velocidad (5), 1 celular (4), 2 frenada (3), 3 carril (3), 4 señal (6), 5 bajo efectos (10)
+        Object[][] ev = {
+            {"B-010203", 1, LocalDate.of(2026, 9, 14), "Av. Amazonas y Naciones Unidas", 3},
+            {"B-010203", 4, LocalDate.of(2026, 10, 2), "Av. 6 de Diciembre", 2},
+            {"C-020304", 0, LocalDate.of(2026, 3, 3), "Panamericana Norte km 5", 4},
+            {"C-020304", 5, LocalDate.of(2026, 7, 19), "Av. Simón Bolívar", 3},
+            {"C-020304", 3, LocalDate.of(2026, 8, 30), "Av. Simón Bolívar", 4},
+            {"B-030405", 2, LocalDate.of(2026, 5, 11), "Redondel Norte", 1},
+            {"E-040506", 0, LocalDate.of(2025, 12, 20), "Av. Mariscal Sucre", 5},
+            {"E-040506", 4, LocalDate.of(2026, 6, 6), "Av. 10 de Agosto", 5},
+            {"E-040506", 1, LocalDate.of(2026, 10, 28), "Av. Eloy Alfaro", 3},
+            {"C-060708", 3, LocalDate.of(2026, 4, 4), "Av. Occidental", 3},
+            {"C-060708", 0, LocalDate.of(2026, 11, 2), "Av. Occidental", 2},
+            {"B-070809", 1, LocalDate.of(2026, 10, 15), "Av. Amazonas y Colón", 4},
+        };
+        for (Object[] e : ev) {
+            gestorEventos.registrarEvento((String) e[0], (Integer) e[1], (LocalDate) e[2], (String) e[3],
+                    (Integer) e[4], "", gestorConductores);
+        }
         gestorEventos.registrarEvento("B-001234", 0, LocalDate.of(2025, 11, 5),
                 "Av. Quito y 10 de Agosto", 2, "", gestorConductores);
         gestorEventos.registrarEvento("B-001234", 2, LocalDate.of(2026, 1, 18),
@@ -65,6 +108,7 @@ public class SistemaSECR {
     public GestorEventos getGestorEventos() { return gestorEventos; }
     public GestorCursos getGestorCursos() { return gestorCursos; }
     public GestorReportes getGestorReportes() { return gestorReportes; }
+    public GestorRiesgo getGestorRiesgo() { return gestorRiesgo; }
 
     public String mostrarColeccion(List<?> lista) {
         if (lista.isEmpty()) return "No hay registros para mostrar.\n";

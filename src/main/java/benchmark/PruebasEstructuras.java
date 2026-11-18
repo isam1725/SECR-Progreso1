@@ -53,6 +53,18 @@ public class PruebasEstructuras {
         for (int i = 0; i < 100000; i++) secuencial.insertar(i, i);
         verificar(secuencial.altura() <= 18, "100 000 claves en orden creciente: altura " + secuencial.altura() + " (un ABB común tendría 100 000)");
 
+        boolean posOk = true;
+        for (int i = 0; i < ref.size(); i += 37) posOk &= avl.posicion(ref.get(i)) == i + 1 && ("v" + ref.get(i)).equals(avl.kEsimo(i + 1));
+        verificar(posOk && avl.posicion(-1) == -1 && avl.kEsimo(0) == null, "posicion() y kEsimo() coinciden con la referencia (tamaño de subárbol)");
+
+        System.out.println("== Lista doblemente enlazada ==");
+        ListaDoble<Integer> ld = new ListaDoble<>();
+        for (int x : new int[]{5, 1, 4, 2, 3}) ld.insertarOrdenado(x, Comparator.naturalOrder());
+        verificar(ld.aLista().equals(List.of(1, 2, 3, 4, 5)) && ld.aListaInversa().equals(List.of(5, 4, 3, 2, 1)), "inserción ordenada y recorrido en ambos sentidos");
+        ListaDoble<Integer>.Cursor cu = ld.cursor();
+        cu.avanzar(); cu.avanzar(); cu.retroceder();
+        verificar(cu.actual() == 2 && cu.indice() == 2 && cu.hayAnterior() && cu.haySiguiente(), "cursor: avanzar y retroceder");
+
         System.out.println("== Pila y Cola ==");
         Pila<Integer> pila = new Pila<>();
         Cola<Integer> cola = new Cola<>();
@@ -124,7 +136,7 @@ public class PruebasEstructuras {
         System.out.println("== Gestores del sistema (código heredado sin tablas hash) ==");
         SistemaSECR sistema = new SistemaSECR();
         sistema.cargarDatosPrueba();
-        verificar(sistema.getGestorConductores().listarTodos().size() == 5, "carga de datos de prueba: 5 conductores");
+        verificar(sistema.getGestorConductores().listarTodos().size() == 12, "carga de datos de prueba: 12 conductores");
         verificar(sistema.getGestorConductores().buscarPorLicencia("b-005678") != null, "búsqueda por licencia sobre ArbolAVL (insensible a mayúsculas)");
         verificar(sistema.getGestorConductores().estadisticaInfraccionMasComun().startsWith("Infracción más cometida: Exceso de velocidad"), "infracción más común con conteo en ArbolAVL");
         verificar(sistema.getGestorCursos().listarCursos().size() == 2, "catálogo de cursos en ArbolAVL");
