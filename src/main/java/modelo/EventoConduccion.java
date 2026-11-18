@@ -3,7 +3,11 @@ package modelo;
 import static modelo.Main.*;
 import java.time.LocalDate;
 
-public class EventoConduccion {
+/**
+ * Evento registrado en el historial de un conductor. Es abstracta: hoy el único tipo concreto es
+ * {@link Infraccion}; la clase define la regla común de deducción (puntos base × gravedad).
+ */
+public abstract class EventoConduccion {
     protected String idEvento;
     protected LocalDate fechaHora;
     protected String ubicacion;

@@ -55,6 +55,13 @@ public class Conductor {
         historialConduccion.agregarEvento(infraccion);
     }
 
+    /** Quita una infracción del conductor y de su historial (usado al deshacer un registro). */
+    public boolean removerInfraccion(Infraccion infraccion) {
+        boolean quitada = infracciones.remove(infraccion);
+        if (quitada) historialConduccion.removerEvento(infraccion);
+        return quitada;
+    }
+
     public void agregarPrueba(Prueba prueba) {
         historialPruebas.add(prueba);
         if (prueba.estaAprobada()) {

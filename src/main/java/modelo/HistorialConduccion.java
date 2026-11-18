@@ -21,6 +21,7 @@ public class HistorialConduccion {
     }
 
     public void agregarEvento(EventoConduccion e) { eventos.add(e); }
+    public boolean removerEvento(EventoConduccion e) { return eventos.remove(e); }
     public void agregarRecuperacion(double puntos) { puntosRecuperacion += puntos; }
     public void setBonificacionBuenComportamiento(double puntos) { bonificacionBuenComportamiento = Math.max(0, puntos); }
 

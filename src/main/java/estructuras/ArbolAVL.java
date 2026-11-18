@@ -15,6 +15,7 @@ import java.util.function.Supplier;
  *   <li>insertar, buscar, eliminar: O(log n)</li>
  *   <li>rango(desde, hasta): O(log n + k) — recorrido en orden podado</li>
  *   <li>primeros(k): O(log n + k)</li>
+ *   <li>posicion(clave) y kEsimo(k): O(log n) gracias al tamaño de subárbol guardado en cada nodo</li>
  *   <li>enOrden: O(n); espacio O(n)</li>
  * </ul>
  * Reemplaza a las tablas hash del proyecto anterior (LinkedHashMap/HashMap).
@@ -26,6 +27,7 @@ public class ArbolAVL<K extends Comparable<? super K>, V> {
         V valor;
         Nodo izq, der;
         int altura = 1;
+        int tam = 1;          // nodos del subárbol: permite posicion() y kEsimo() en O(log n)
         Nodo(K clave, V valor) { this.clave = clave; this.valor = valor; }
     }
 
@@ -123,6 +125,35 @@ public class ArbolAVL<K extends Comparable<? super K>, V> {
         return res;
     }
 
+    /**
+     * Posición (1 = la menor clave) de una clave en el orden del árbol, o -1 si no existe.
+     * Usa el tamaño de los subárboles (árbol de estadísticos de orden): O(log n).
+     */
+    public int posicion(K clave) {
+        int pos = 0;
+        Nodo n = raiz;
+        while (n != null) {
+            int c = clave.compareTo(n.clave);
+            if (c < 0) n = n.izq;
+            else if (c > 0) { pos += t(n.izq) + 1; n = n.der; }
+            else return pos + t(n.izq) + 1;
+        }
+        return -1;
+    }
+
+    /** Valor en la posición k (1 = menor clave), o null si k está fuera de rango: O(log n). */
+    public V kEsimo(int k) {
+        if (k < 1 || k > tamanio) return null;
+        Nodo n = raiz;
+        while (n != null) {
+            int izq = t(n.izq);
+            if (k <= izq) n = n.izq;
+            else if (k == izq + 1) return n.valor;
+            else { k -= izq + 1; n = n.der; }
+        }
+        return null;
+    }
+
     public K minimo() {
         if (raiz == null) return null;
         Nodo n = raiz;
@@ -173,7 +204,11 @@ public class ArbolAVL<K extends Comparable<? super K>, V> {
     // ------------------------------------------------------------------ balanceo
 
     private int h(Nodo n) { return n == null ? 0 : n.altura; }
-    private void actualizar(Nodo n) { n.altura = 1 + Math.max(h(n.izq), h(n.der)); }
+    private int t(Nodo n) { return n == null ? 0 : n.tam; }
+    private void actualizar(Nodo n) {
+        n.altura = 1 + Math.max(h(n.izq), h(n.der));
+        n.tam = 1 + t(n.izq) + t(n.der);
+    }
     private int factor(Nodo n) { return h(n.izq) - h(n.der); }
 
     private Nodo rotarDerecha(Nodo y) {
@@ -216,6 +251,7 @@ public class ArbolAVL<K extends Comparable<? super K>, V> {
         if ((min != null && n.clave.compareTo(min) <= 0) || (max != null && n.clave.compareTo(max) >= 0)) return -1;
         int hi = valido(n.izq, min, n.clave), hd = valido(n.der, n.clave, max);
         if (hi < 0 || hd < 0 || Math.abs(hi - hd) > 1 || n.altura != 1 + Math.max(hi, hd)) return -1;
+        if (n.tam != 1 + t(n.izq) + t(n.der)) return -1;
         return n.altura;
     }
 }
