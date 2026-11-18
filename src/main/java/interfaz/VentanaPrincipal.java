@@ -5,6 +5,7 @@ import negocio.GestorConductores;
 import negocio.GestorEventos;
 import negocio.GestorCursos;
 import negocio.GestorReportes;
+import negocio.GestorRiesgo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,13 +22,15 @@ public class VentanaPrincipal extends JFrame {
     private GestorEventos gestorEventos;
     private GestorCursos gestorCursos;
     private GestorReportes gestorReportes;
+    private GestorRiesgo gestorRiesgo;
 
     private CardLayout cardLayout;
     private JPanel panelCentral;
 
     private PanelInicio panelInicio;
     private PanelConductores panelConductores;
-    private PanelEventos panelEventos;
+    private PanelInfracciones panelInfracciones;
+    private PanelRiesgo panelRiesgo;
     private PanelLicencias panelLicencias;
     private PanelReportesAlertas panelReportes;
     private PanelRecuperacion panelRecuperacion;
@@ -39,11 +42,12 @@ public class VentanaPrincipal extends JFrame {
         this.gestorEventos = sistema.getGestorEventos();
         this.gestorCursos = sistema.getGestorCursos();
         this.gestorReportes = sistema.getGestorReportes();
+        this.gestorRiesgo = sistema.getGestorRiesgo();
 
         // Configuración de la ventana
         setTitle("SECR - Sistema de Evaluación de Conducción Responsable");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1100, 700);
+        setSize(1280, 760);
         setLocationRelativeTo(null);
         setResizable(true);
 
@@ -65,7 +69,8 @@ public class VentanaPrincipal extends JFrame {
         // Crear todos los paneles
         panelInicio = new PanelInicio(sistema, gestorConductores, gestorEventos, this);
         panelConductores = new PanelConductores(gestorConductores, gestorEventos, this);
-        panelEventos = new PanelEventos(gestorConductores, gestorEventos, this);
+        panelInfracciones = new PanelInfracciones(gestorConductores, gestorEventos, gestorRiesgo, this);
+        panelRiesgo = new PanelRiesgo(gestorConductores, gestorRiesgo);
         panelLicencias = new PanelLicencias(gestorConductores, this);
         panelReportes = new PanelReportesAlertas(gestorConductores, gestorEventos, gestorCursos, gestorReportes, this);
         panelRecuperacion = new PanelRecuperacion(gestorConductores, gestorCursos, this);
@@ -74,7 +79,8 @@ public class VentanaPrincipal extends JFrame {
         // Agregar paneles al CardLayout
         panelCentral.add(panelInicio, "INICIO");
         panelCentral.add(panelConductores, "CONDUCTORES");
-        panelCentral.add(panelEventos, "EVENTOS");
+        panelCentral.add(panelInfracciones, "INFRACCIONES");
+        panelCentral.add(panelRiesgo, "RIESGO");
         panelCentral.add(panelLicencias, "LICENCIAS");
         panelCentral.add(panelReportes, "REPORTES");
         panelCentral.add(panelRecuperacion, "RECUPERACION");
@@ -110,11 +116,14 @@ public class VentanaPrincipal extends JFrame {
         panel.setBorder(BorderFactory.createEtchedBorder());
 
         // Crear botones del menú
-        String[] opciones = {"Inicio", "Conductores", "Eventos", "Licencias", "Reportes y Alertas", "Recuperación de Puntos", "Catálogos", "Salir"};
-        String[] paneles = {"INICIO", "CONDUCTORES", "EVENTOS", "LICENCIAS", "REPORTES", "RECUPERACION", "CATALOGOS"};
+        String[] opciones = {"Inicio", "Conductores", "M2 · Infracciones", "M3 · Ranking de riesgo", "Licencias", "Reportes y Alertas", "Recuperación de Puntos", "Catálogos", "Salir"};
+        String[] paneles = {"INICIO", "CONDUCTORES", "INFRACCIONES", "RIESGO", "LICENCIAS", "REPORTES", "RECUPERACION", "CATALOGOS"};
 
         for (int i = 0; i < opciones.length; i++) {
             JButton btn = crearBotonMenu(opciones[i]);
+            if (opciones[i].startsWith("M2") || opciones[i].startsWith("M3")) {
+                btn.setFont(new Font("Arial", Font.BOLD, 12));       // módulos implementados en el Progreso 2
+            }
             int indice = i;
 
             btn.addActionListener(e -> {
@@ -129,11 +138,12 @@ public class VentanaPrincipal extends JFrame {
                     switch (indice) {
                         case 0 -> panelInicio.actualizarDatos();
                         case 1 -> panelConductores.actualizarDatos();
-                        case 2 -> panelEventos.actualizarDatos();
-                        case 3 -> panelLicencias.limpiarCampos();
-                        case 4 -> panelReportes.limpiarCampos();
-                        case 5 -> panelRecuperacion.actualizarDatos();
-                        case 6 -> { }
+                        case 2 -> panelInfracciones.actualizarDatos();
+                        case 3 -> panelRiesgo.actualizarDatos();
+                        case 4 -> panelLicencias.limpiarCampos();
+                        case 5 -> panelReportes.limpiarCampos();
+                        case 6 -> panelRecuperacion.actualizarDatos();
+                        case 7 -> { }
                     }
                 }
             });
@@ -174,10 +184,20 @@ public class VentanaPrincipal extends JFrame {
     /**
      * Método para actualizar datos en paneles específicos desde otros paneles
      */
+    /** Muestra un panel por su nombre (lo usan las capturas de demostración). */
+    void mostrarPanel(String nombre) {
+        cardLayout.show(panelCentral, nombre);
+        if (nombre.equals("RIESGO")) panelRiesgo.actualizarDatos();
+        if (nombre.equals("INFRACCIONES")) panelInfracciones.actualizarDatos();
+    }
+
+    PanelInfracciones getPanelInfracciones() { return panelInfracciones; }
+    PanelRiesgo getPanelRiesgo() { return panelRiesgo; }
+
     public void actualizarTodosPaneles() {
         panelInicio.actualizarDatos();
         panelConductores.actualizarDatos();
-        panelEventos.actualizarDatos();
+        // M2 y M3 se refrescan al abrir su pestaña para no borrar el resultado recién mostrado.
         // Recuperación se actualiza al abrir su pestaña para no borrar resultados recién generados.
     }
 }
