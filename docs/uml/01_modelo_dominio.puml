@@ -1,15 +1,11 @@
 @startuml 01_modelo_dominio
-' SECR - Sistema de Evaluación de Conducción Responsable
-' Programación III - Progreso 1 - Grupo 4
-' Diagrama de clases preliminar: modelo de dominio
-' Leyenda: <<existente>> clase reutilizada del semestre anterior,
-'          <<nueva>> clase planificada para Progreso 2.
-
+' SECR - Progreso 2 - Diagrama de clases del modelo de dominio SEGÚN EL CÓDIGO (paquete modelo)
+' Verde = nuevo o modificado en el Progreso 2 · Gris punteado = planificado para la entrega final (no existe aún en el código)
 skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam linetype ortho
-skinparam nodesep 70
-skinparam ranksep 60
+skinparam nodesep 60
+skinparam ranksep 55
 skinparam defaultFontName Arial
 skinparam defaultFontSize 12
 skinparam class {
@@ -18,196 +14,145 @@ skinparam class {
   ArrowColor #333333
   HeaderBackgroundColor #F6E7EC
 }
-skinparam class<<nueva>> {
+skinparam class<<P2>> {
   BackgroundColor #EAF4EA
   BorderColor #2E7D32
 }
-skinparam note {
-  BackgroundColor #FFFDE7
-  BorderColor #B8A200
+skinparam class<<pendiente>> {
+  BackgroundColor #F2F2F2
+  BorderColor #9E9E9E
+  FontColor #6E6E6E
+  BorderStyle dashed
 }
-
-title SECR - Modelo de dominio (UML preliminar, Progreso 1)
+title SECR - Modelo de dominio implementado (Progreso 2)
 
 package "modelo" {
-
-  enum EstadoConductor <<nueva>> {
-    ACTIVO
-    INACTIVO
-    SUSPENDIDO
-  }
-
-  enum CategoriaLicencia <<nueva>> {
-    B
-    C
-    E
-  }
-
-  enum NivelAlerta <<nueva>> {
-    VERDE
-    AMARILLA
-    NARANJA
-    ROJA
-  }
-
-  class Conductor <<existente>> {
+  class Conductor {
     - cedula : String
     - nombreCompleto : String
     - fechaNacimiento : LocalDate
     - puntajeActual : double
-    - estado : EstadoConductor
+    - estado : String
     + getEdad() : int
     + puedeRenovarLicencia() : boolean
-    + calcularAniosSinInfracciones() : long
+    + cambiarEstado(nuevoEstado : String) : void
     + agregarInfraccion(i : Infraccion) : void
+    + removerInfraccion(i : Infraccion) : boolean
     + agregarPrueba(p : Prueba) : void
-    + cambiarEstado(e : EstadoConductor) : void
+    + calcularAniosSinInfracciones() : long
   }
-
-  class Licencia <<existente>> {
+  class Licencia {
     + {static} DURACION_ANIOS : int = 5
     - numero : String
-    - categoria : CategoriaLicencia
+    - categoria : String
     - fechaEmision : LocalDate
     - fechaVencimiento : LocalDate
     + estaVencida() : boolean
     + estaCercaDeCaducar(dias : int) : boolean
-    + diasParaVencer() : long
     + renovarDesde(fecha : LocalDate) : void
   }
-
-  class RenovacionLicencia <<existente>> {
+  class RenovacionLicencia {
     - fechaRenovacion : LocalDate
+    - numeroLicencia : String
     - vencimientoAnterior : LocalDate
     - vencimientoNuevo : LocalDate
   }
-
-  class HistorialConduccion <<existente>> {
-    - puntajeInicial : double = 100
+  class HistorialConduccion {
+    - eventos : List<EventoConduccion>
+    - puntajeInicial : double
     - puntosRecuperacion : double
     - bonificacionBuenComportamiento : double
     + agregarEvento(e : EventoConduccion) : void
-    + agregarRecuperacion(puntos : double) : void
+    + removerEvento(e : EventoConduccion) : boolean
     + calcularPuntajeFinal() : double
   }
-
-  abstract class EventoConduccion <<existente>> {
+  abstract class EventoConduccion <<P2>> {
     # idEvento : String
     # fechaHora : LocalDate
     # ubicacion : String
-    # gravedad : int {1..5}
+    # gravedad : int
     # descripcion : String
     + calcularPuntosDeduccion() : int
     + clasificarGravedad() : String
   }
-
-  class Infraccion <<existente>> {
-    + Infraccion(id, fecha, ubicacion, gravedad, desc, tipo)
-  }
-
-  class TipoEvento <<existente>> {
+  class Infraccion
+  class TipoEvento {
     - codigo : String
     - nombre : String
+    - descripcion : String
     - puntosBase : int
     - estado : String
     + estaActivo() : boolean
   }
-
-  class Curso <<existente>> {
+  enum NivelRiesgo <<P2>> {
+    ROJO
+    NARANJA
+    AMARILLO
+    VERDE
+    - etiqueta : String
+    - min : double
+    - max : double
+    + {static} clasificar(puntaje : double) : NivelRiesgo
+  }
+  class Curso {
     - codigo : String
     - nombre : String
     - puntosRecuperacion : int
     - duracionHoras : int
     - porcentajeMinimoAprobacion : double
-    - cupoMaximo : int
-    + estaActivo() : boolean
+    - estado : String
     + agregarPregunta(p : Pregunta) : void
   }
-
-  class Pregunta <<existente>> {
+  class Pregunta {
     - id : String
     - texto : String
     - opciones : List<String>
     - respuestaCorrecta : int
-    + esCorrecta(respuesta : int) : boolean
+    + esCorrecta(r : int) : boolean
   }
-
-  class Prueba <<existente>> {
+  class Prueba {
     - id : String
     - fecha : LocalDate
     - calificacion : double
     - motivo : String
-    + estaAprobada() : boolean
-    + setCalificacion(c : double) : void
   }
-
-  class EvaluacionPrueba <<existente>> {
+  class EvaluacionPrueba {
     - nota : double
     - aprobado : boolean
     - puntosRecuperados : int
   }
-
-  class InscripcionCurso <<nueva>> {
-    - id : String
-    - fechaSolicitud : LocalDate
-    - estado : String
-    + asignar() : void
-    + marcarAtendida() : void
-  }
-
-  class Zona <<nueva>> {
-    - codigo : String
-    - nombre : String
-    - infraccionesRegistradas : int
-    + incrementarInfracciones() : void
-    + esPuntoCritico(umbral : int) : boolean
-  }
-
-  class TramoVial <<nueva>> {
-    - distanciaKm : double
-    - bidireccional : boolean
-  }
-
-  class Alerta <<existente>> {
-    - nivel : NivelAlerta
+  class Alerta {
+    - nivel : String
     - mensaje : String
     - fechaAlerta : LocalDate
-    + {static} generarAlerta(c : Conductor) : Alerta
   }
 }
 
-Conductor "1" *-- "1" Licencia : posee >
-Conductor "1" *-- "1" HistorialConduccion : registra >
-Conductor "1" *-- "0..*" RenovacionLicencia : historial >
-HistorialConduccion "1" *-- "0..*" EventoConduccion : contiene >
+package "Entrega final (planificado, aún no implementado)" {
+  class InscripcionCurso <<pendiente>>
+  class Zona <<pendiente>>
+  class TramoVial <<pendiente>>
+}
+
+Conductor "1" *-- "1" Licencia
+Conductor "1" *-- "1" HistorialConduccion
+Conductor "1" *-- "0..*" RenovacionLicencia : historialRenovaciones
+Conductor "1" *-- "0..*" Infraccion : infracciones
+HistorialConduccion "1" o-- "0..*" EventoConduccion : eventos
 EventoConduccion <|-- Infraccion
-EventoConduccion "0..*" --> "1" TipoEvento : clasificado como >
-Conductor "1" -- "0..*" Prueba : rinde >
-Prueba "0..*" --> "1" Curso : evalúa >
-Prueba "1" *-- "0..1" EvaluacionPrueba : resume >
-Curso "1" *-- "0..*" Pregunta : banco >
-InscripcionCurso "0..*" --> "1" Conductor : solicitante >
-InscripcionCurso "0..*" --> "1" Curso : solicita >
-Alerta "0..*" --> "1" Conductor : advierte a >
-EventoConduccion "0..*" --> "0..1" Zona : ocurre en >
-TramoVial "0..*" --> "2" Zona : une >
-Conductor ..> EstadoConductor
-Licencia ..> CategoriaLicencia
-Alerta ..> NivelAlerta
-
-note right of EventoConduccion
-  Deducción = puntosBase(tipo) × gravedad
-  Fecha no futura y no mayor a 5 años.
-end note
-
-note bottom of HistorialConduccion
-  puntaje = clamp(0, 100,
-    100 − Σ deducciones + recuperación + bonificación)
-end note
+EventoConduccion "0..*" --> "1" TipoEvento : tipo
+Conductor "1" -- "0..*" Prueba : historialPruebas
+Prueba "0..*" --> "1" Curso
+Prueba "1" *-- "0..1" EvaluacionPrueba
+Curso "1" *-- "0..*" Pregunta
+Conductor ..> NivelRiesgo : se clasifica en
+InscripcionCurso ..> Curso
+TramoVial ..> Zona
 
 legend right
   |= Color |= Significado |
-  |<#F6E7EC>| <<existente>> reutilizada y ajustada |
-  |<#EAF4EA>| <<nueva>> planificada para Progreso 2 |
+  |<#FFFFFF>| Implementada (Progreso 1 / semestre anterior) |
+  |<#EAF4EA>| Nueva o modificada en el Progreso 2 |
+  |<#F2F2F2>| Planificada para la entrega final |
 endlegend
 @enduml

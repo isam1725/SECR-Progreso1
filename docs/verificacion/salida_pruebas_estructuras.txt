@@ -1,0 +1,56 @@
+== ?rbol AVL ==
+  [OK]    20 000 inserciones/eliminaciones aleatorias coinciden con la referencia
+  [OK]    recorrido en orden = claves ordenadas
+  [OK]    propiedad AVL y orden de claves se mantienen
+  [OK]    tama?o correcto
+  [OK]    rango(1000, 1200) devuelve exactamente las claves del intervalo
+  [OK]    primeros(5) empieza por la menor clave
+  [OK]    100 000 claves en orden creciente: altura 17 (un ABB com?n tendr?a 100 000)
+  [OK]    posicion() y kEsimo() coinciden con la referencia (tama?o de sub?rbol)
+== Lista doblemente enlazada ==
+  [OK]    inserci?n ordenada y recorrido en ambos sentidos
+  [OK]    cursor: avanzar y retroceder
+== Pila y Cola ==
+  [OK]    pila: ?ltimo en entrar, primero en salir
+  [OK]    cola: primero en entrar, primero en salir
+== Mont?culo binario (cola de prioridad) ==
+  [OK]    propiedad de mont?culo tras 5 000 inserciones
+  [OK]    menores(20) correcto y no destructivo
+  [OK]    menores(10) con filtro
+  [OK]    hastaTope(? 1000) poda y devuelve todos los elementos
+  [OK]    extraerMinimo sucesivo ordena (heapsort)
+== Grafo vial (BFS, Dijkstra, DFS) ==
+  [OK]    Dijkstra: Base?A?B?D = 5 km
+  [OK]    Dijkstra: sin ruta entre componentes distintas
+  [OK]    BFS a 1 salto: A y C
+  [OK]    BFS a 2 saltos: A, C y B
+  [OK]    DFS con pila: 2 componentes conexas
+== Alternativa A vs B (ranking de riesgo) ==
+  [OK]    top-10 id?ntico en A y B durante 4 000 actualizaciones
+  [OK]    sem?foro rojo (puntaje < 40): mismo conjunto en A y B
+  [OK]    b?squeda por licencia: mismos resultados
+  [OK]    B compacta su mont?culo (1 veces) y acota la memoria
+  [OK]    el ranking sale ordenado de menor a mayor puntaje
+== Gestores del sistema (c?digo heredado sin tablas hash) ==
+Cargando datos de prueba...
+? Conductor registrado exitosamente: Carlos Mendoza Pinto (37 a?os)
+? Conductor registrado exitosamente: Sof?a Torres Vera (28 a?os)
+? Conductor registrado exitosamente: Luis Ram?rez Calle (44 a?os)
+? Conductor registrado exitosamente: Ana Su?rez Mora (24 a?os)
+? Conductor registrado exitosamente: Pedro Guti?rrez Loor (56 a?os)
+? Conductor registrado exitosamente: Valentina Andrade Cevallos (31 a?os)
+? Conductor registrado exitosamente: Diego Herrera Salazar (39 a?os)
+? Conductor registrado exitosamente: Gabriela Paredes Moreno (25 a?os)
+? Conductor registrado exitosamente: Jorge Espinoza Pazmi?o (51 a?os)
+? Conductor registrado exitosamente: Luc?a Ch?vez Aguirre (34 a?os)
+? Conductor registrado exitosamente: Andr?s Guerrero Loor (42 a?os)
+? Conductor registrado exitosamente: Paula Moreno Zambrano (23 a?os)
+? Datos de prueba cargados correctamente.
+
+  [OK]    carga de datos de prueba: 12 conductores
+  [OK]    b?squeda por licencia sobre ArbolAVL (insensible a may?sculas)
+  [OK]    infracci?n m?s com?n con conteo en ArbolAVL
+  [OK]    cat?logo de cursos en ArbolAVL
+  [OK]    reporte de mejor curso
+
+Resultado: 32 pruebas correctas, 0 fallidas.

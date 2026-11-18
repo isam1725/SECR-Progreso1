@@ -1,0 +1,43 @@
+n,operacion,alternativa,valor
+1000,"Registro de n conductores",A,0.568
+1000,"Registro de n conductores",B,0.424
+1000,"500 x (actualizar puntaje + top-10)",A,0.575
+1000,"500 x (actualizar puntaje + top-10)",B,1.240
+1000,"20 000 actualizaciones de puntaje",A,14.807
+1000,"20 000 actualizaciones de puntaje",B,5.663
+1000,"1 000 consultas top-10 (sin cambios)",A,0.118
+1000,"1 000 consultas top-10 (sin cambios)",B,1.335
+1000,"50 consultas semáforo rojo (< 40)",A,0.226
+1000,"50 consultas semáforo rojo (< 40)",B,0.913
+1000,"10 000 búsquedas por licencia",A,2.292
+1000,"10 000 búsquedas por licencia",B,1.617
+1000,"Memoria tras n registros y 2n cambios (MB)",A,0.084
+1000,"Memoria tras n registros y 2n cambios (MB)",B,0.123
+10000,"Registro de n conductores",A,14.751
+10000,"Registro de n conductores",B,9.830
+10000,"500 x (actualizar puntaje + top-10)",A,0.997
+10000,"500 x (actualizar puntaje + top-10)",B,1.298
+10000,"20 000 actualizaciones de puntaje",A,34.026
+10000,"20 000 actualizaciones de puntaje",B,12.047
+10000,"1 000 consultas top-10 (sin cambios)",A,0.147
+10000,"1 000 consultas top-10 (sin cambios)",B,1.518
+10000,"50 consultas semáforo rojo (< 40)",A,2.443
+10000,"50 consultas semáforo rojo (< 40)",B,12.022
+10000,"10 000 búsquedas por licencia",A,4.864
+10000,"10 000 búsquedas por licencia",B,5.487
+10000,"Memoria tras n registros y 2n cambios (MB)",A,0.839
+10000,"Memoria tras n registros y 2n cambios (MB)",B,1.223
+100000,"Registro de n conductores",A,287.972
+100000,"Registro de n conductores",B,204.622
+100000,"500 x (actualizar puntaje + top-10)",A,3.054
+100000,"500 x (actualizar puntaje + top-10)",B,2.056
+100000,"20 000 actualizaciones de puntaje",A,116.044
+100000,"20 000 actualizaciones de puntaje",B,42.193
+100000,"1 000 consultas top-10 (sin cambios)",A,0.179
+100000,"1 000 consultas top-10 (sin cambios)",B,1.527
+100000,"50 consultas semáforo rojo (< 40)",A,64.755
+100000,"50 consultas semáforo rojo (< 40)",B,220.217
+100000,"10 000 búsquedas por licencia",A,15.110
+100000,"10 000 búsquedas por licencia",B,15.647
+100000,"Memoria tras n registros y 2n cambios (MB)",A,8.392
+100000,"Memoria tras n registros y 2n cambios (MB)",B,12.358

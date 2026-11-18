@@ -1,0 +1,117 @@
+REGISTRO DE VERIFICACIÓN FUNCIONAL · SECR Progreso 2 · 2026-11-17
+====================================================================================================
+VF01 [M2] Registrar infracción válida (cálculo de deducción, índice AVL y pila)
+   Entrada:   B-030405 · Uso de celular (4 pts) · gravedad 2 · 10/11/2026
+   Esperado:  Deducción 8 pts; puntaje 97.0 → 89.0; eventos +1; pila = 1
+   Obtenido:  Deducción 8 pts; puntaje 97.0 → 89.0; eventos 16 → 17; pila = 1
+   Cumple:    Sí
+
+VF02 [M2] Registrar infracción a una licencia inexistente
+   Entrada:   Z-999999 · Exceso de velocidad
+   Esperado:  Rechazo: no existe el conductor
+   Obtenido:  Rechazado: «No existe un conductor con la licencia Z-999999.»
+   Cumple:    Sí
+
+VF03 [M2] Registrar infracción con fecha futura
+   Entrada:   B-050607 · fecha 01/01/2030
+   Esperado:  Rechazo por fecha futura
+   Obtenido:  Rechazado: «La fecha del evento no puede ser futura.»
+   Cumple:    Sí
+
+VF04 [M2] Registrar infracción con gravedad fuera de rango
+   Entrada:   B-050607 · gravedad 6
+   Esperado:  Rechazo: la gravedad debe estar entre 1 y 5
+   Obtenido:  Rechazado: «La gravedad debe estar entre 1 y 5.»
+   Cumple:    Sí
+
+VF05 [M2] Consulta por rango de fechas (AVL por fecha)
+   Entrada:   01/09/2026 a 31/10/2026, todos los conductores
+   Esperado:  4 eventos (14/09, 02/10, 15/10, 28/10) en orden cronológico
+   Obtenido:  4 eventos: 14/09, 02/10, 15/10, 28/10, en orden
+   Cumple:    Sí
+
+VF06 [M2] Consulta con rango invertido
+   Entrada:   31/10/2026 a 01/09/2026
+   Esperado:  Rechazo: fecha inicial posterior a la final
+   Obtenido:  Rechazado: «La fecha inicial no puede ser posterior a la fecha final.»
+   Cumple:    Sí
+
+VF07 [M2] Deshacer el último registro (pila LIFO)
+   Entrada:   Deshacer tras VF01
+   Esperado:  Se revierte EVT de VF01; puntaje vuelve a 97.0; eventos 16; pila = 0
+   Obtenido:  Revertido EVT-017; puntaje 97.0; eventos 16; pila = 0
+   Cumple:    Sí
+
+VF08 [M2] Deshacer con la pila vacía (caso límite)
+   Entrada:   Deshacer sin registros pendientes
+   Esperado:  Aviso: no hay registros para deshacer
+   Obtenido:  Rechazado: «No hay registros para deshacer en esta sesión.»
+   Cumple:    Sí
+
+VF09 [M2] Ordenar eventos por gravedad (Merge Sort)
+   Entrada:   Todos los eventos (16)
+   Esperado:  Primero gravedad 5; secuencia no creciente
+   Obtenido:  Primero gravedad 5 (EVT-008); no creciente
+   Cumple:    Sí
+
+VF10 [M2] Historial navegable (lista doblemente enlazada)
+   Entrada:   E-040506: inicio → avanzar ×2 → retroceder
+   Esperado:  3 eventos: 20/12/2025 → 28/10/2026 → 06/06/2026; sin anterior al inicio ni siguiente al final
+   Obtenido:  3 eventos: 20/12/2025 → 28/10/2026 → 06/06/2026; anterior al inicio: no; siguiente al final: no
+   Cumple:    Sí
+
+VF11 [M2] Puntaje llega a 0: inactivación y rechazo de nuevos registros (límite)
+   Entrada:   C-020304 (38.0 pts) + Conducción bajo efectos, gravedad 4 (−40)
+   Esperado:  Puntaje 0; estado Inactivo; nuevo registro rechazado; al deshacer vuelve a Activo con 38.0
+   Obtenido:  Puntaje 0; estado Inactivo; nuevo registro: rechazado; tras deshacer: Activo con 38.0
+   Cumple:    Sí
+
+VF12 [M3] Top-k de mayor riesgo (recorrido en orden del AVL)
+   Entrada:   k = 3
+   Esperado:  Los 3 menores puntajes: E-040506, C-020304, C-009012
+   Obtenido:  E-040506, C-020304, C-009012
+   Cumple:    Sí
+
+VF13 [M3] Top-k con k mayor que el número de conductores (límite)
+   Entrada:   k = 50 con 12 conductores
+   Esperado:  Devuelve los 12 conductores, ordenados
+   Obtenido:  12 conductores; orden correcto
+   Cumple:    Sí
+
+VF14 [M3] Top-k con valor inválido
+   Entrada:   k = 0
+   Esperado:  Rechazo: k debe estar entre 1 y 100
+   Obtenido:  Rechazado: «El valor de k debe estar entre 1 y 100.»
+   Cumple:    Sí
+
+VF15 [M3] Posición de un conductor en el ranking (AVL con tamaño de subárbol)
+   Entrada:   b-050607 (en minúsculas)
+   Esperado:  Posición 11 de 12
+   Obtenido:  Posición 11 de 12
+   Cumple:    Sí
+
+VF16 [M3] Posición de una licencia inexistente
+   Entrada:   B-999999
+   Esperado:  Rechazo: no existe en el ranking
+   Obtenido:  Rechazado: «No existe un conductor con la licencia B-999999 en el ranking.»
+   Cumple:    Sí
+
+VF17 [M3] Filtro por semáforo rojo (consulta de rango en el AVL)
+   Entrada:   Nivel ROJO (puntaje < 40)
+   Esperado:  2 conductores: E-040506, C-020304
+   Obtenido:  2 conductores: E-040506, C-020304
+   Cumple:    Sí
+
+VF18 [M3] Reubicación automática al registrar y al deshacer (integración M2 → M3)
+   Entrada:   B-050607 recibe Conducción bajo efectos, gravedad 4 (−40); luego se deshace
+   Esperado:  Sube de la posición 11 a la 4; al deshacer vuelve a la 11
+   Obtenido:  Posición 11 → 4 → 11
+   Cumple:    Sí
+
+VF19 [M3] Conteo por nivel del semáforo
+   Entrada:   Todos los conductores
+   Esperado:  Suma de niveles = 12
+   Obtenido:  Rojo 2, naranja 0, amarillo 2, verde 8 (suma 12)
+   Cumple:    Sí
+
+Resultado: 19 de 19 casos cumplen.

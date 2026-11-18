@@ -1,0 +1,177 @@
+@startuml 02_modulos_M2_M3
+' SECR - Progreso 2 - Clases que implementan M2 y M3, tal como están en el código
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype polyline
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #8C1D40
+  ArrowColor #333333
+}
+skinparam class<<P2>> {
+  BackgroundColor #EAF4EA
+  BorderColor #2E7D32
+}
+skinparam class<<estructura>> {
+  BackgroundColor #E8F0FB
+  BorderColor #1F4E8C
+}
+skinparam class<<pendiente>> {
+  BackgroundColor #F2F2F2
+  BorderColor #9E9E9E
+  FontColor #6E6E6E
+}
+title SECR - Implementación de los módulos M2 y M3 (Progreso 2)
+
+package "interfaz" {
+  class VentanaPrincipal {
+    - cardLayout : CardLayout
+    + actualizarTodosPaneles() : void
+  }
+  class PanelInfracciones <<P2>> {
+    + actualizarDatos() : void
+    ~ registrar() : void
+    ~ deshacer() : void
+    ~ consultarRango() : void
+    ~ cargarHistorial() : void
+    ~ moverHistorial(adelante : boolean) : void
+  }
+  class PanelRiesgo <<P2>> {
+    + actualizarDatos() : void
+    ~ verTop() : void
+    ~ verNivel() : void
+    ~ consultarPosicion() : void
+    ~ aplicarBonificacion() : void
+  }
+}
+
+package "util" {
+  class SistemaSECR {
+    + cargarDatosPrueba() : void
+    + getGestorEventos() : GestorEventos
+    + getGestorRiesgo() : GestorRiesgo
+  }
+}
+
+package "negocio" {
+  class GestorConductores {
+    - conductores : ArbolAVL<String, Conductor>
+    + obtenerConductorObligatorio(lic) : Conductor
+    + actualizarPuntaje(lic) : void
+    + aplicarBonificacionBuenComportamiento(lic) : int
+  }
+  class GestorEventos <<P2>> {
+    - tiposEvento : List<TipoEvento>
+    - indiceFechas : IndiceTemporalEventos
+    - pilaDeshacer : Pila<OperacionRegistro>
+    - gestorRiesgo : GestorRiesgo
+    + registrarEvento(lic, tipo, fecha, ubicacion, gravedad, desc, gc) : Infraccion
+    + deshacerUltimoRegistro(gc) : OperacionRegistro
+    + consultarPorRango(desde, hasta, lic, gc) : List<EventoConduccion>
+    + ordenar(eventos, criterio) : List<EventoConduccion>
+    + historialNavegable(lic, gc) : ListaDoble<Infraccion>
+    + infraccionMasFrecuente(eventos) : String
+  }
+  class "GestorEventos.OperacionRegistro" as OperacionRegistro <<P2>> {
+    infraccion : Infraccion
+    conductor : Conductor
+    estadoAnterior : String
+    puntajeAnterior : double
+  }
+  class GestorRiesgo <<P2>> {
+    - ranking : RankingRiesgoAVL
+    + sincronizar(gc) : void
+    + reubicar(c : Conductor) : void
+    + topRiesgo(k : int) : List<Conductor>
+    + porNivel(n : NivelRiesgo) : List<Conductor>
+    + posicion(lic : String) : int
+    + conteoPorNivel() : int[]
+  }
+}
+
+package "estructuras" {
+  class "ArbolAVL<K, V>" as ArbolAVL <<estructura>> {
+    - raiz : Nodo
+    + insertar(k, v) : void
+    + eliminar(k) : boolean
+    + buscar(k) : V
+    + rango(desde, hasta) : List<V>
+    + primeros(k : int) : List<V>
+    + posicion(k) : int
+  }
+  class "Pila<T>" as Pila <<estructura>> {
+    + apilar(x : T) : void
+    + desapilar() : T
+    + cima() : T
+  }
+  class "ListaDoble<T>" as ListaDoble <<estructura>> {
+    + insertarOrdenado(x, cmp) : void
+    + cursor() : Cursor
+  }
+  class IndiceTemporalEventos <<estructura>> {
+    - porFecha : ArbolAVL<LocalDate, List<EventoConduccion>>
+    + agregar(e) : void
+    + eliminar(e) : boolean
+    + consultarRango(desde, hasta) : List<EventoConduccion>
+  }
+  class OrdenamientoMezcla <<estructura>> {
+    + {static} ordenar(lista, cmp) : List<T>
+  }
+  class RankingRiesgoAVL <<estructura>> {
+    - porLicencia : ArbolAVL<String, Conductor>
+    - porRiesgo : ArbolAVL<ClaveRiesgo, Conductor>
+    - puntajeIndexado : ArbolAVL<String, Double>
+    + reubicar(c : Conductor) : void
+    + topRiesgo(k) : List<Conductor>
+    + enRangoPuntaje(min, max) : List<Conductor>
+    + posicion(lic) : int
+  }
+  class ClaveRiesgo <<estructura>> {
+    puntaje : double
+    licencia : String
+  }
+  class "Cola · MonticuloBinario · Grafo" as Pendientes <<pendiente>> {
+    implementadas y probadas;
+    se integran en M4 y M5
+    (entrega final)
+  }
+}
+
+VentanaPrincipal "1" *-- "1" PanelInfracciones
+VentanaPrincipal "1" *-- "1" PanelRiesgo
+VentanaPrincipal --> SistemaSECR
+SistemaSECR "1" *-- "1" GestorConductores
+SistemaSECR "1" *-- "1" GestorEventos
+SistemaSECR "1" *-- "1" GestorRiesgo
+PanelInfracciones --> GestorEventos
+PanelInfracciones ..> GestorRiesgo : consulta posición
+PanelRiesgo --> GestorRiesgo
+GestorEventos "1" *-- "1" IndiceTemporalEventos
+GestorEventos "1" *-- "1" Pila
+Pila "1" o-- "0..*" OperacionRegistro
+GestorEventos ..> ListaDoble : crea
+GestorEventos ..> OrdenamientoMezcla : usa
+GestorEventos --> GestorRiesgo : notifica cambios de puntaje
+GestorEventos ..> GestorConductores
+GestorRiesgo "1" *-- "1" RankingRiesgoAVL
+RankingRiesgoAVL "1" *-- "3" ArbolAVL
+RankingRiesgoAVL ..> ClaveRiesgo
+IndiceTemporalEventos "1" *-- "1" ArbolAVL
+GestorConductores "1" *-- "2" ArbolAVL
+
+Pila -[hidden]down- ListaDoble
+OrdenamientoMezcla -[hidden]down- Pendientes
+IndiceTemporalEventos -[hidden]right- RankingRiesgoAVL
+
+legend right
+  |= Color |= Significado |
+  |<#FFFFFF>| Clase existente |
+  |<#EAF4EA>| Nueva en el Progreso 2 |
+  |<#E8F0FB>| Estructura de datos propia |
+  |<#F2F2F2>| Implementada, se usa en la entrega final |
+endlegend
+@enduml
