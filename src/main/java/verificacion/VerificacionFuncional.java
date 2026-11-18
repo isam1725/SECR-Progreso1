@@ -40,8 +40,7 @@ public class VerificacionFuncional {
         java.io.PrintStream original = System.out;
         System.setOut(new java.io.PrintStream(java.io.OutputStream.nullOutputStream()));   // silencia mensajes de carga
         sistema = new SistemaSECR();
-        sistema.cargarDatosPrueba();
-        System.setOut(original);
+        sistema.cargarDatosPrueba();                // la salida se mantiene silenciada durante los casos
         gc = sistema.getGestorConductores();
         ge = sistema.getGestorEventos();
         gr = sistema.getGestorRiesgo();
@@ -173,6 +172,7 @@ public class VerificacionFuncional {
                 suma == gc.listarTodos().size());
 
         // ------------------------------------------------------------- salida
+        System.setOut(original);
         int ok = 0;
         System.out.println("REGISTRO DE VERIFICACIÓN FUNCIONAL · SECR Progreso 2 · " + LocalDate.now());
         System.out.println("=".repeat(100));

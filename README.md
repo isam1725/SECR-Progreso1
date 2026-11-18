@@ -1,132 +1,104 @@
 # SECR: Sistema de Evaluación de Conducción Responsable
 
 **ISWZ2102 · Programación III · Ingeniería en Ciberseguridad · Universidad de Las Américas (UDLA), Quito**
-**Período 2027-1 · Grupo 4 · Avance del proyecto, Progreso 1**
+**Período 2027-1 · Grupo 4 · Versión del Progreso 2** (etiqueta `progreso-2`; el Progreso 1 está en la etiqueta `progreso-1`)
+
+Repositorio: **https://github.com/isam1725/SECR-Progreso1**
 
 | Integrante | Módulo a cargo |
 |---|---|
-| Mateo Vasquez | M1 · Conductores y licencias (árboles AVL por licencia y por nombre) |
-| Alex Palma | M2 · Eventos e infracciones (AVL por fecha + pila para deshacer) |
-| Martín Jurado | M3 · Puntaje y priorización de riesgo (ranking sobre árboles AVL) |
+| Mateo Vasquez | M1 · Conductores y licencias |
+| Alex Palma | **M2 · Registro y análisis de infracciones (implementado en el Progreso 2)** |
+| Martín Jurado | **M3 · Puntaje y priorización de riesgo (implementado en el Progreso 2)** |
 | Amelio Macas | M4 · Recuperación de puntos: cursos, cola FIFO de inscripción y pruebas |
-| Israel Zurita | M5 · Alertas, reportes y operativos (cola de prioridad + grafo vial con BFS/DFS/Dijkstra) |
+| Israel Zurita | M5 · Alertas, reportes y operativos de control |
 
-## 1. Problema
+## 1. Descripción
 
-En Ecuador la licencia de conducir funciona con un sistema de puntos, pero el seguimiento del
-comportamiento de cada conductor está repartido entre registros de infracciones, cursos y
-renovaciones. SECR centraliza esa información y, sobre todo, la **procesa**: calcula un puntaje de
-conducción responsable (0 a 100), mantiene siempre actualizado el **ranking de conductores de mayor
-riesgo**, consulta el historial de infracciones **por rangos de fechas**, organiza la **cola de
-inscripción** a cursos de recuperación y planifica **operativos de control** sobre un mapa vial.
+SECR registra las infracciones de tránsito de cada conductor, calcula un puntaje de conducción
+responsable (0 a 100) y mantiene siempre actualizado el **ranking de conductores de mayor riesgo**.
+Está escrito en Java con interfaz gráfica Swing y usa estructuras de datos implementadas por el
+equipo. No usa tablas hash ni Trie.
 
-**Restricción de diseño:** solo se usan **pilas, colas, árboles y grafos**, implementados por el
-equipo. No se usan tablas hash (HashMap, HashSet, LinkedHashMap) ni Trie; las del código heredado
-fueron reemplazadas por `ArbolAVL`.
+## 2. Ejecutar
 
-## 2. Estructuras y alternativa seleccionada
+Requisito: **Java 17 o superior** (`java -version`).
 
-| Estructura (propia) | Uso en SECR |
+* **Windows:** doble clic en `ejecutar.bat`, o bien `java -jar dist\SECR.jar`.
+* **Linux / macOS:** `./ejecutar.sh`, o bien `java -jar dist/SECR.jar`.
+* **IntelliJ IDEA / NetBeans:** abrir la carpeta, marcar `src/main/java` como carpeta de fuentes y
+  ejecutar la clase `interfaz.Interfaz`.
+
+Para recompilar y regenerar `dist/SECR.jar` use `compilar.bat` (Windows) o `./compilar.sh`.
+
+La aplicación arranca con 12 conductores y 16 infracciones de prueba. En el menú izquierdo:
+
+* **M2 · Infracciones:** registrar una infracción (por ejemplo licencia `B-030405`, gravedad 2),
+  deshacerla, consultar por rango de fechas, ordenar y navegar el historial de un conductor.
+* **M3 · Ranking de riesgo:** top-k, filtro por semáforo, posición de un conductor (por ejemplo
+  `B-050607`) y bonificación por buen comportamiento.
+
+## 3. Módulos implementados en el Progreso 2
+
+| Módulo | Clases | Estructuras y algoritmos |
+|---|---|---|
+| M2 · Infracciones | `negocio.GestorEventos`, `interfaz.PanelInfracciones` | Árbol AVL por fecha (`IndiceTemporalEventos`), pila para deshacer (`Pila`), lista doblemente enlazada (`ListaDoble`), Merge Sort (`OrdenamientoMezcla`) |
+| M3 · Riesgo | `negocio.GestorRiesgo`, `interfaz.PanelRiesgo` | Ranking sobre árboles AVL (`RankingRiesgoAVL`), consulta de rango, posición en O(log n) con tamaño de subárbol (`ArbolAVL.posicion`) |
+
+Al registrar o deshacer una infracción en M2, el conductor se reubica automáticamente en el
+ranking de M3.
+
+## 4. Verificación y evidencias (reproducibles)
+
+```bash
+javac -encoding UTF-8 -d out $(find src/main/java -name "*.java")
+java -cp out verificacion.VerificacionFuncional    # 19 casos VF de M2 y M3 → 19/19 cumplen
+java -cp out benchmark.PruebasEstructuras          # 32 pruebas de las estructuras → 32/32
+java -Xmx3g -cp out benchmark.BenchmarkAlternativas  # benchmark A vs B del componente M3
+java -cp out interfaz.CapturaDemo                  # regenera las capturas de docs/capturas
+```
+
+En Windows (PowerShell) la primera línea es:
+`javac -encoding UTF-8 -d out (Get-ChildItem -Recurse src/main/java -Filter *.java).FullName`
+
+| Carpeta | Contenido |
 |---|---|
-| `ArbolAVL<K,V>` | Índices por licencia, nombre, fecha y código de curso; conteos; ranking de riesgo |
-| `Pila<T>` | Deshacer el último registro (M2); recorridos iterativos (in-order, DFS) |
-| `Cola<T>` | Cola FIFO de inscripción a cursos (M4); BFS |
-| `MonticuloBinario<T>` | Cola de prioridad de caducidad de licencias (M5); Dijkstra |
-| `Grafo` | Mapa vial: zonas de influencia (BFS), ruta de operativos (Dijkstra), zonas aisladas (DFS) |
+| `docs/verificacion/` | Salida y CSV del registro de verificación funcional y de las pruebas de estructuras |
+| `docs/capturas/` | 19 capturas de la aplicación ejecutando M2 y M3 (casos normales, de error y límite) |
+| `docs/benchmark/` | Datos originales, salida de consola e instrucciones del benchmark |
+| `docs/uml/` | Diagramas PlantUML del código actual (`progreso1/` guarda los del Progreso 1) |
+| `docs/informe/` | Informes técnicos del Progreso 1 y del Progreso 2 (PDF) |
 
-Para el componente crítico (ranking de riesgo, M3) se compararon dos alternativas competitivas:
-**A** (dos árboles AVL) y **B** (cola de prioridad con actualización perezosa).
-Resultados con n = 100 000 (mediana de 5 repeticiones, OpenJDK 21, 2 vCPU):
-
-| Operación | A · AVL | B · montículo |
-|---|---:|---:|
-| 20 000 actualizaciones de puntaje | 116,0 ms | 42,2 ms |
-| 1 000 consultas top-10 | 0,18 ms | 1,53 ms |
-| 50 consultas semáforo rojo | 64,8 ms | 220,2 ms |
-| Memoria tras n registros y 2n cambios | 8,4 MB | 12,4 MB |
-
-**Seleccionada: Alternativa A** (consultas ordenadas y más rápidas, memoria fija, una sola estructura
-reutilizada en todos los módulos). Detalle en [`docs/benchmark/resultados.csv`](docs/benchmark/resultados.csv)
-y en el informe técnico.
-
-## 3. Estructura del repositorio
+## 5. Estructura del repositorio
 
 ```
 .
-├── README.md
-├── docs/
-│   ├── informe/               Informe técnico del Progreso 1 (PDF)
-│   ├── uml/                   Diagramas UML en PlantUML (.puml) y exportados (.png/.svg)
-│   └── benchmark/             Resultados (CSV) y gráfico de la comparación A vs B
+├── README.md · compilar.bat/.sh · ejecutar.bat/.sh
+├── dist/SECR.jar                Proyecto ejecutable
+├── docs/                        Informe, UML, capturas, verificación y benchmark
 └── src/main/java/
-    ├── modelo/                Clases de dominio (reutilizadas): Conductor, Licencia, EventoConduccion…
-    ├── negocio/               Gestores de cada módulo (ahora sobre ArbolAVL, sin tablas hash)
-    ├── interfaz/              Interfaz gráfica Swing (reutilizada)
-    ├── util/                  SistemaSECR (fachada que agrupa los gestores)
-    ├── estructuras/           NUEVO: ArbolAVL, Pila, Cola, MonticuloBinario, Grafo,
-    │   │                      IndiceTemporalEventos, OrdenamientoMezcla
-    │   └── comparacion/       NUEVO: RankingRiesgo, alternativas A (AVL) y B (montículo)
-    └── benchmark/             NUEVO: pruebas automáticas y benchmark A vs B
+    ├── modelo/                  Clases de dominio (Conductor, Licencia, EventoConduccion, NivelRiesgo…)
+    ├── negocio/                 Gestores: GestorEventos (M2), GestorRiesgo (M3), GestorConductores…
+    ├── interfaz/                Swing: VentanaPrincipal, PanelInfracciones (M2), PanelRiesgo (M3)…
+    ├── util/                    SistemaSECR (fachada y datos de prueba)
+    ├── estructuras/             ArbolAVL, Pila, Cola, ListaDoble, MonticuloBinario, Grafo,
+    │   │                        IndiceTemporalEventos, OrdenamientoMezcla
+    │   └── comparacion/         RankingRiesgo: alternativas A (AVL) y B (montículo)
+    ├── verificacion/            VerificacionFuncional (casos VF)
+    └── benchmark/               PruebasEstructuras, BenchmarkAlternativas
 ```
 
-## 4. Cómo compilar y ejecutar
+## 6. Estado
 
-Requisitos: **JDK 17 o superior** (probado con OpenJDK 21). No se necesitan librerías externas.
-
-```bash
-# Compilar todo
-javac -encoding UTF-8 -d out $(find src/main/java -name "*.java")   # Linux / macOS
-# Windows (PowerShell):
-# javac -encoding UTF-8 -d out (Get-ChildItem -Recurse src/main/java -Filter *.java).FullName
-
-# Aplicación con interfaz gráfica
-java -cp out interfaz.Interfaz
-
-# Aplicación de consola
-java -cp out modelo.Main
-
-# Pruebas automáticas (29 pruebas: AVL, pila, cola, montículo, grafo, A = B y gestores)
-java -cp out benchmark.PruebasEstructuras
-
-# Benchmark A vs B (tarda unos minutos; escribe docs/benchmark/resultados.csv)
-java -Xmx3g -cp out benchmark.BenchmarkAlternativas
-```
-
-En IntelliJ IDEA: *File → Open* sobre la carpeta, marcar `src/main/java` como *Sources Root* y ejecutar
-`interfaz.Interfaz`.
-
-## 5. Diagramas UML
-
-Los diagramas se mantienen como código en PlantUML para que el equipo los revise y versione:
-
-* `docs/uml/01_modelo_dominio.puml`: clases de dominio, atributos, métodos, multiplicidades,
-  herencia (`EventoConduccion` → `Infraccion`) y composiciones.
-* `docs/uml/02_negocio_estructuras.puml`: gestores por módulo y estructuras propias (pilas, colas, árboles y grafo).
-
-Se pueden abrir con la extensión *PlantUML* de IntelliJ/VS Code o en <https://www.plantuml.com/plantuml>.
-
-## 6. Flujo de trabajo con Git
-
-* `main`: versión estable que se entrega en cada progreso.
-* `develop`: integración del equipo.
-* `feature/m1-conductores`, `feature/m2-eventos`, `feature/m3-riesgo`, `feature/m4-cursos`,
-  `feature/m5-reportes`: una rama por módulo y responsable.
-* Cada cambio entra por *pull request* revisado por otro integrante y con
-  `benchmark.PruebasEstructuras` en verde.
-
-## 7. Estado
-
-| Entregable | Estado |
+| Componente | Estado |
 |---|---|
-| Código base del semestre anterior (Swing, modelo, negocio) | Reutilizado y compilando |
-| Estructuras propias (AVL, pila, cola, montículo, grafo) y alternativas A/B probadas | Listo |
-| Tablas hash del código heredado reemplazadas por ArbolAVL | Listo |
-| Integración de las estructuras en los gestores y en la interfaz | Planificado para Progreso 2 |
-| Nuevas clases `InscripcionCurso`, `Zona`, `TramoVial`, `GestorRiesgo` y enums de estado | Planificado para Progreso 2 |
+| M2 · Registro y análisis de infracciones | **Implementado (Progreso 2)** |
+| M3 · Puntaje y priorización de riesgo | **Implementado (Progreso 2)** |
+| M1 · Conductores y licencias (código heredado, índices AVL) | Funcional; se completará la búsqueda por prefijo |
+| M4 · Cola FIFO de inscripción a cursos | Entrega final (la `Cola` ya está implementada y probada) |
+| M5 · Grafo vial (BFS, DFS, Dijkstra) y cola de prioridad de caducidad | Entrega final (`Grafo` y `MonticuloBinario` ya están implementados y probados) |
 
-## 8. Uso de IA
+## 7. Uso de IA
 
-Se usó un asistente de IA generativa (Claude, de Anthropic) como apoyo para estructurar el
-informe, prototipar las estructuras de datos y el benchmark, y revisar la redacción. El equipo
-revisó, ejecutó y validó todo el contenido; el detalle está en la declaración de uso de IA del
-informe técnico.
+Se usó un asistente de IA generativa (Claude, de Anthropic) como apoyo. El equipo revisó, ejecutó
+y validó todo el contenido; el detalle está en la declaración de uso de IA del informe técnico.
