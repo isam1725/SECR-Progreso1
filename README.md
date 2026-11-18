@@ -1,7 +1,7 @@
 # SECR: Sistema de Evaluación de Conducción Responsable
 
 **ISWZ2102 · Programación III · Ingeniería en Ciberseguridad · Universidad de Las Américas (UDLA), Quito**
-**Período 2027-1 · Grupo 4 · Versión del Progreso 2** (etiqueta `progreso-2`; el Progreso 1 está en la etiqueta `progreso-1`)
+**Período 2027-1 · Grupo 4 · Versión del Progreso 2** (el Progreso 1 está en el commit `f53f7ad`)
 
 Repositorio: **https://github.com/isam1725/SECR-Progreso1**
 
@@ -67,7 +67,7 @@ En Windows (PowerShell) la primera línea es:
 | `docs/capturas/` | 19 capturas de la aplicación ejecutando M2 y M3 (casos normales, de error y límite) |
 | `docs/benchmark/` | Datos originales, salida de consola e instrucciones del benchmark |
 | `docs/uml/` | Diagramas PlantUML del código actual (`progreso1/` guarda los del Progreso 1) |
-| `docs/informe/` | Informes técnicos del Progreso 1 y del Progreso 2 (PDF) |
+| `docs/informe/` | Informes técnicos del Progreso 1 y del Progreso 2 (PDF y DOCX) |
 
 ## 5. Estructura del repositorio
 
