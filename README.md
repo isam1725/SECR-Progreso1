@@ -7,11 +7,11 @@ Repositorio: **https://github.com/isam1725/SECR-Progreso1**
 
 | Integrante | Módulo a cargo |
 |---|---|
-| Mateo Vasquez | M1 · Conductores y licencias |
-| Alex Palma | **M2 · Registro y análisis de infracciones (implementado en el Progreso 2)** |
-| Martín Jurado | **M3 · Puntaje y priorización de riesgo (implementado en el Progreso 2)** |
-| Amelio Macas | M4 · Recuperación de puntos: cursos, cola FIFO de inscripción y pruebas |
-| Israel Zurita | M5 · Alertas, reportes y operativos de control |
+| Jeremy Vasquez Santos | M1 · Conductores y licencias |
+| Alex Palma Zambrano | **M2 · Registro y análisis de infracciones (implementado en el Progreso 2)** |
+| Alan Jurado Balseca | **M3 · Puntaje y priorización de riesgo (implementado en el Progreso 2)** |
+| Amelio Macas Pachar | M4 · Recuperación de puntos: cursos, cola FIFO de inscripción y pruebas |
+| Matias Zurita Garcia | M5 · Alertas, reportes y operativos de control |
 
 ## 1. Descripción
 
@@ -67,7 +67,7 @@ En Windows (PowerShell) la primera línea es:
 | `docs/capturas/` | 19 capturas de la aplicación ejecutando M2 y M3 (casos normales, de error y límite) |
 | `docs/benchmark/` | Datos originales, salida de consola e instrucciones del benchmark |
 | `docs/uml/` | Diagramas PlantUML del código actual (`progreso1/` guarda los del Progreso 1) |
-| `docs/informe/` | Informes técnicos del Progreso 1 y del Progreso 2 (PDF y DOCX) |
+| `docs/informe/` | Informes técnicos del Progreso 1 y del Progreso 2; la versión vigente del Progreso 2 es `SECR_Informe_Progreso2_Grupo4_v2` (plantilla UDLA) |
 
 ## 5. Estructura del repositorio
 
