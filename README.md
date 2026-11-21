@@ -67,7 +67,7 @@ En Windows (PowerShell) la primera línea es:
 | `docs/capturas/` | 19 capturas de la aplicación ejecutando M2 y M3 (casos normales, de error y límite) |
 | `docs/benchmark/` | Datos originales, salida de consola e instrucciones del benchmark |
 | `docs/uml/` | Diagramas PlantUML del código actual (`progreso1/` guarda los del Progreso 1) |
-| `docs/informe/` | Informes técnicos del Progreso 1 y del Progreso 2; la versión vigente del Progreso 2 es `SECR_Informe_Progreso2_Grupo4_v3` (plantilla UDLA, alineada con los temas de clase) |
+| `docs/informe/` | Informes técnicos del Progreso 1 y del Progreso 2; la versión vigente del Progreso 2 es `SECR_Informe_Progreso2_Grupo4_v4` (plantilla UDLA, alineada con los temas de clase) |
 
 ## 5. Estructura del repositorio
 
